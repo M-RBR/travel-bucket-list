@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import type { Country, CountryData } from "./@types/Country";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [countries, setCountries] = useState<Country[]>([]);
+
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies"
+      );
+      const data: CountryData = await response.json();
+      console.log();
+      setCountries(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Explore Countries</h1>
+      <ul>
+        {countries.map((country) => (
+          <li key={country.name.common}>
+            {country.name.common}
+            <img src={country.flags.png} alt={country.flags.alt} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;

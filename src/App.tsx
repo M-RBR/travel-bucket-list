@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { APIError, Country, CountryData } from "./@types/Country";
+import CountryCard from "./components/CountryCard";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -33,14 +34,28 @@ function App() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <h1>Explore Countries</h1>
       {!error && (
-        <ul>
+        /* <ul>
           {countries.map((country) => (
             <li key={country.name.common}>
               {country.name.common}
               <img src={country.flags.png} alt={country.flags.alt} />
             </li>
           ))}
-        </ul>
+        </ul> */
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            border: "solid white 1px",
+            gap: "1em",
+            padding: "1em",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {countries.map((country) => (
+            <CountryCard key={country.name.common} country={country} />
+          ))}
+        </div>
       )}
     </div>
   );

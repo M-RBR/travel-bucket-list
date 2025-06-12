@@ -30,28 +30,13 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <h1>Explore Countries</h1>
+    <div className="min-h-screen bg-dark-blue p-4">
+      {error && <p className="text-red-500">{error}</p>}
+      <h1 className="text-3xl font-bold text-center text-white mb-8">
+        Explore Countries
+      </h1>
       {!error && (
-        /* <ul>
-          {countries.map((country) => (
-            <li key={country.name.common}>
-              {country.name.common}
-              <img src={country.flags.png} alt={country.flags.alt} />
-            </li>
-          ))}
-        </ul> */
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            border: "solid white 1px",
-            gap: "1em",
-            padding: "1em",
-            justifyContent: "space-evenly",
-          }}
-        >
+        <div className="flex flex-wrap justify-evenly gap-4 p-4">
           {countries.map((country) => (
             <CountryCard key={country.name.common} country={country} />
           ))}

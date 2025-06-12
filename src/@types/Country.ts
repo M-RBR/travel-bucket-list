@@ -2074,6 +2074,10 @@ export interface Languages {
   tkl?: string;
 }
 
+export type APIError = {
+  error: string;
+};
+
 /* Alternative: 
 
 export interface Welcome8 {

@@ -5,6 +5,7 @@ import CountryCard from "./components/CountryCard";
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [error, setError] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
 
   async function fetchData() {
     setError("");
@@ -15,8 +16,6 @@ function App() {
       if (response.ok) {
         const data: CountryData = await response.json();
         console.log("Fetched countries:", data);
-        console.log("Sample country:", data[0]);
-        console.log("Independent field example:", data[0].independent);
         setCountries(data);
       } else {
         const data: APIError = await response.json();
@@ -32,15 +31,57 @@ function App() {
     fetchData();
   }, []);
 
+  const allLanguages = Array.from(
+    new Set(
+      countries.flatMap((country) => Object.values(country.languages || {}))
+    )
+  ).sort();
+
+  const filteredCountries = countries.filter(
+    (country) =>
+      selectedLanguage === "" ||
+      Object.values(country.languages || {}).includes(selectedLanguage)
+  );
+
+  const handleLanguageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedLanguage(event.target.value);
+    console.log("Selected Language:", event.target.value);
+  };
+
   return (
     <div className="min-h-screen p-4">
       {error && <p className="text-red-500">{error}</p>}
-      <h1 className="text-3xl font-bold text-center text-white mb-8">
-        Travel Bucket List
+
+      <h1 className="text-3xl font-bold text-center text-white mb-4">
+        🌍 Travel Bucket List ✈️
       </h1>
+
+      <p className="text-center text-white mb-6">
+        Discover countries around the world or filter by language.
+      </p>
+
+      {/* Language Filter Dropdown */}
+      <div className="flex justify-center mb-8">
+        <select
+          value={selectedLanguage}
+          onChange={handleLanguageChange}
+          className="p-2 rounded text-black"
+        >
+          <option value="">Select a Language</option>
+          {allLanguages.map((lang) => (
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Display filtered countries */}
       {!error && (
         <div className="flex flex-wrap justify-evenly gap-4 p-4">
-          {countries.map((country) => (
+          {filteredCountries.map((country) => (
             <CountryCard key={country.name.common} country={country} />
           ))}
         </div>

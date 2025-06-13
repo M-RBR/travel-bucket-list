@@ -7,6 +7,7 @@ export interface Country {
   capital: string[];
   region: string;
   languages: Languages;
+  independent: boolean;
 }
 
 export interface Flags {

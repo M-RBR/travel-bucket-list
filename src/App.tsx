@@ -10,10 +10,13 @@ function App() {
     setError("");
     try {
       const response = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies"
+        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent"
       );
       if (response.ok) {
         const data: CountryData = await response.json();
+        console.log("Fetched countries:", data);
+        console.log("Sample country:", data[0]);
+        console.log("Independent field example:", data[0].independent);
         setCountries(data);
       } else {
         const data: APIError = await response.json();
@@ -30,10 +33,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark-blue p-4">
+    <div className="min-h-screen p-4">
       {error && <p className="text-red-500">{error}</p>}
       <h1 className="text-3xl font-bold text-center text-white mb-8">
-        Explore Countries
+        Travel Bucket List
       </h1>
       {!error && (
         <div className="flex flex-wrap justify-evenly gap-4 p-4">

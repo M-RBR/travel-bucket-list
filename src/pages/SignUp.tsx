@@ -1,3 +1,3 @@
 export default function SignUp() {
-  return <h2 className="text-2xl">Sign Up Page</h2>;
+  return <h2 className="text-2xl text-white">Sign Up Page</h2>;
 }

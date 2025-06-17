@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
+import "./App.css";
 
-import App from "./App.tsx"; // If this is your <Layout />
+import App from "./App.tsx"; // <Layout />
 import Home from "./pages/Home.tsx";
 import Explore from "./pages/Explore.tsx";
 import SignUp from "./pages/SignUp.tsx";

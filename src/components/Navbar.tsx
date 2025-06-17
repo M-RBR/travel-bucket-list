@@ -1,12 +1,9 @@
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 
 export default function Navbar() {
   return (
     <nav className="bg-blue-900 text-white px-4 py-3 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold">
-          🌍 Travel Bucket List
-        </Link>
         <div className="space-x-4">
           <NavLink
             to="/"

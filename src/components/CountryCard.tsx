@@ -6,8 +6,8 @@ type Props = {
 
 export default function CountryCard({ country }: Props) {
   return (
-    <div className="border-2 border-white rounded-lg p-4 bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-300 w-full sm:w-80">
-      <h2 className="text-xl font-bold text-white mb-2">
+    <div className="border-2 border-white rounded-lg p-4 bg-gray-100 bg-opacity-10 hover:bg-opacity-20 transition-all duration-300 w-full sm:w-80">
+      <h2 className="text-xl font-bold text-black mb-2 text-center">
         {country.name.common}
       </h2>
       <img

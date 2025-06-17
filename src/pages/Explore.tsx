@@ -53,7 +53,7 @@ export default function Explore() {
         <select
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
-          className="p-2 rounded text-black"
+          className="p-2 rounded bg-gray-500 text-white"
         >
           <option value="">Select a Language</option>
           {allLanguages.map((lang) => (

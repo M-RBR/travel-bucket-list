@@ -6,6 +6,7 @@ export default function Explore() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [error, setError] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
 
   async function fetchData() {
     setError("");
@@ -29,17 +30,29 @@ export default function Explore() {
     fetchData();
   }, []);
 
+  // Extract unique languages
   const allLanguages = Array.from(
     new Set(
       countries.flatMap((country) => Object.values(country.languages || {}))
     )
   ).sort();
 
-  const filteredCountries = countries.filter(
-    (country) =>
+  // Extract unique regions
+  const allRegions = Array.from(
+    new Set(countries.map((country) => country.region))
+  ).sort();
+
+  // Combined filters
+  const filteredCountries = countries.filter((country) => {
+    const matchesLanguage =
       selectedLanguage === "" ||
-      Object.values(country.languages || {}).includes(selectedLanguage)
-  );
+      Object.values(country.languages || {}).includes(selectedLanguage);
+
+    const matchesRegion =
+      selectedRegion === "" || country.region === selectedRegion;
+
+    return matchesLanguage && matchesRegion;
+  });
 
   return (
     <div className="min-h-screen p-4">
@@ -49,16 +62,31 @@ export default function Explore() {
         Explore Countries
       </h1>
 
-      <div className="flex justify-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+        {/* Language filter */}
         <select
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
           className="p-2 rounded bg-gray-500 text-white"
         >
-          <option value="">Select a Language</option>
+          <option value="">Filter by Language</option>
           {allLanguages.map((lang) => (
             <option key={lang} value={lang}>
               {lang}
+            </option>
+          ))}
+        </select>
+
+        {/* Region filter */}
+        <select
+          value={selectedRegion}
+          onChange={(e) => setSelectedRegion(e.target.value)}
+          className="p-2 rounded bg-gray-500 text-white"
+        >
+          <option value="">Filter by Region</option>
+          {allRegions.map((region) => (
+            <option key={region} value={region}>
+              {region}
             </option>
           ))}
         </select>

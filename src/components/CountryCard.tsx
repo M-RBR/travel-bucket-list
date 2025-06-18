@@ -15,6 +15,7 @@ export default function CountryCard({ country }: Props) {
         alt={country.flags.alt}
         className="w-full h-48 object-cover mb-3 rounded"
       />
+      <p className="text-black text-center">Capital City: {country.capital}</p>
     </div>
   );
 }

@@ -8,6 +8,7 @@ export default function Explore() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   // const [selectedCurrency, setSelectedCurrency] = useState<string>("");
+  const [onlyNonIndependent, setOnlyNonIndependent] = useState<boolean>(false);
 
   async function fetchData() {
     setError("");
@@ -75,7 +76,10 @@ export default function Explore() {
       */
     }
 
-    return matchesLanguage && matchesRegion;
+    const matchesIndependence =
+      !onlyNonIndependent || country.independent === false;
+
+    return matchesLanguage && matchesRegion && matchesIndependence;
   });
 
   return (
@@ -131,6 +135,15 @@ export default function Explore() {
 
         */}
       </div>
+
+      <label className="text-white flex items-center justify-center gap-2">
+        <input
+          type="checkbox"
+          checked={onlyNonIndependent}
+          onChange={(e) => setOnlyNonIndependent(e.target.checked)}
+        />
+        Show only non-independent countries
+      </label>
 
       <div className="flex flex-wrap justify-evenly gap-4 p-4">
         {filteredCountries.map((country) => (

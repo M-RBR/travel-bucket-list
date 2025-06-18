@@ -7,6 +7,7 @@ export default function Explore() {
   const [error, setError] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
+  // const [selectedCurrency, setSelectedCurrency] = useState<string>("");
 
   async function fetchData() {
     setError("");
@@ -42,6 +43,19 @@ export default function Explore() {
     new Set(countries.map((country) => country.region))
   ).sort();
 
+  {
+    /* 
+
+  // Extract unique currencies
+  const allCurrencies = Array.from(
+    new Set(
+      countries.flatMap((country) => Object.keys(country.currencies || {}))
+    )
+  ).sort(); 
+
+  */
+  }
+
   // Combined filters
   const filteredCountries = countries.filter((country) => {
     const matchesLanguage =
@@ -50,6 +64,16 @@ export default function Explore() {
 
     const matchesRegion =
       selectedRegion === "" || country.region === selectedRegion;
+
+    {
+      /* 
+
+    const matchesCurrency =
+      selectedCurrency === "" ||
+      Object.keys(country.currencies || {}).includes(selectedCurrency);
+
+      */
+    }
 
     return matchesLanguage && matchesRegion;
   });
@@ -90,6 +114,22 @@ export default function Explore() {
             </option>
           ))}
         </select>
+
+        {/*  
+        <select
+          value={selectedCurrency}
+          onChange={(e) => setSelectedCurrency(e.target.value)}
+          className="p-2 rounded bg-gray-500 text-white"
+        >
+          <option value="">Filter by Currency</option>
+          {allCurrencies.map((currency) => (
+            <option key={currency} value={currency}>
+              {currency}
+            </option>
+          ))}
+        </select>
+
+        */}
       </div>
 
       <div className="flex flex-wrap justify-evenly gap-4 p-4">

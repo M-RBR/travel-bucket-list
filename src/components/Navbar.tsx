@@ -9,7 +9,7 @@ export default function Navbar() {
             to="/"
             className={({ isActive }) => (isActive ? "underline" : "")}
           >
-            Home
+            🌍 Home
           </NavLink>
           <NavLink
             to="/explore"
@@ -27,7 +27,7 @@ export default function Navbar() {
             to="/login"
             className={({ isActive }) => (isActive ? "underline" : "")}
           >
-            Login
+            Login ✈️
           </NavLink>
         </div>
       </div>

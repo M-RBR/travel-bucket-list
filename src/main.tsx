@@ -7,16 +7,17 @@ import Home from "./pages/Home.tsx";
 import Explore from "./pages/Explore.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import Login from "./pages/Login.tsx";
+import CountryDetails from "./pages/CountryDetails.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-      {/* Layout wrapper, e.g. with Navbar */}
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="explore" element={<Explore />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
+        <Route path="country/:name" element={<CountryDetails />} />
       </Route>
     </Routes>
   </BrowserRouter>

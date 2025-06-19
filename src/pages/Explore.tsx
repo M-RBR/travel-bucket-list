@@ -14,7 +14,7 @@ export default function Explore() {
     setError("");
     try {
       const response = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent"
+        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent,demonyms,subregion"
       );
       if (response.ok) {
         const data: CountryData = await response.json();

@@ -5,6 +5,7 @@ import CountryCard from "../components/CountryCard";
 export default function Explore() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedCurrency, setSelectedCurrency] = useState<string>("");
@@ -12,6 +13,7 @@ export default function Explore() {
 
   async function fetchData() {
     setError("");
+    setLoading(true);
     try {
       const response = await fetch(
         "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent,demonyms,subregion"
@@ -25,6 +27,8 @@ export default function Explore() {
       }
     } catch (error: unknown) {
       setError("Failed to fetch country data.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -93,7 +97,7 @@ export default function Explore() {
           onChange={(e) => setSelectedLanguage(e.target.value)}
           className="p-2 rounded bg-gray-500 text-white"
         >
-          <option value="">Filter by Language</option>
+          <option value="">Filter by language</option>
           {allLanguages.map((lang) => (
             <option key={lang} value={lang}>
               {lang}
@@ -107,7 +111,7 @@ export default function Explore() {
           onChange={(e) => setSelectedRegion(e.target.value)}
           className="p-2 rounded bg-gray-500 text-white"
         >
-          <option value="">Filter by Region</option>
+          <option value="">Filter by region</option>
           {allRegions.map((region) => (
             <option key={region} value={region}>
               {region}
@@ -121,7 +125,7 @@ export default function Explore() {
           onChange={(e) => setSelectedCurrency(e.target.value)}
           className="p-2 rounded bg-gray-500 text-white"
         >
-          <option value="">Filter by Currency</option>
+          <option value="">Filter by currency</option>
           {allCurrencies.map((currency) => (
             <option key={currency} value={currency}>
               {currency}
@@ -139,11 +143,17 @@ export default function Explore() {
         Show only non-independent countries
       </label>
 
-      <div className="flex flex-wrap justify-evenly gap-4 p-4">
-        {filteredCountries.map((country) => (
-          <CountryCard key={country.name.common} country={country} />
-        ))}
-      </div>
+      {loading ? (
+        <p className="text-white text-center mt-10 text-xl animate-pulse">
+          Loading countries...
+        </p>
+      ) : (
+        <div className="flex flex-wrap justify-evenly gap-4 p-4">
+          {filteredCountries.map((country) => (
+            <CountryCard key={country.name.common} country={country} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

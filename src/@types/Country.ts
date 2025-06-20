@@ -3,6 +3,1375 @@ export type CountryData = Country[];
 export interface Country {
   flags: Flags;
   name: Name;
+  independent: boolean;
+  currencies: Currencies;
+  capital: string[];
+  region: string;
+  subregion: string;
+  languages: {
+    [key: string]: string;
+  };
+  demonyms: Demonyms;
+}
+
+export type APIError = {
+  error: string;
+};
+
+export interface Flags {
+  png: string;
+  svg: string;
+  alt: string;
+}
+
+export interface Name {
+  common: string;
+  official: string;
+  nativeName: {
+    [key: string]: NativeName;
+  };
+}
+
+export interface NativeName {
+  official: string;
+  common: string;
+}
+
+export interface Currencies {
+  [key: string]: Currency;
+}
+
+export interface Currency {
+  name: string;
+  symbol: string;
+}
+
+export interface Demonyms {
+  eng: DemonymDetail;
+  fra: DemonymDetail;
+}
+
+export interface DemonymDetail {
+  f: string;
+  m: string;
+}
+
+export const countries: Country[] = [
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/tg.png",
+      svg: "https://flagcdn.com/tg.svg",
+      alt: "The flag of Togo is composed of five equal horizontal bands of green alternating with yellow. A red square bearing a five-pointed white star is superimposed in the canton.",
+    },
+    name: {
+      common: "Togo",
+      official: "Togolese Republic",
+      nativeName: {
+        fra: {
+          official: "République togolaise",
+          common: "Togo",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      XOF: {
+        name: "West African CFA franc",
+        symbol: "Fr",
+      },
+    },
+    capital: ["Lomé"],
+    region: "Africa",
+    subregion: "Western Africa",
+    languages: {
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Togolese",
+        m: "Togolese",
+      },
+      fra: {
+        f: "Togolaise",
+        m: "Togolais",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/yt.png",
+      svg: "https://flagcdn.com/yt.svg",
+      alt: "",
+    },
+    name: {
+      common: "Mayotte",
+      official: "Department of Mayotte",
+      nativeName: {
+        fra: {
+          official: "Département de Mayotte",
+          common: "Mayotte",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      EUR: {
+        name: "Euro",
+        symbol: "€",
+      },
+    },
+    capital: ["Mamoudzou"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Mahoran",
+        m: "Mahoran",
+      },
+      fra: {
+        f: "Mahoraise",
+        m: "Mahorais",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ge.png",
+      svg: "https://flagcdn.com/ge.svg",
+      alt: "The flag of Georgia has a white field with a large centered red cross that extends to the edges and divides the field into four quarters. A small red Bolnur-Katskhuri cross is centered in each quarter.",
+    },
+    name: {
+      common: "Georgia",
+      official: "Georgia",
+      nativeName: {
+        kat: {
+          official: "საქართველო",
+          common: "საქართველო",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      GEL: {
+        name: "lari",
+        symbol: "₾",
+      },
+    },
+    capital: ["Tbilisi"],
+    region: "Asia",
+    subregion: "Western Asia",
+    languages: {
+      kat: "Georgian",
+    },
+    demonyms: {
+      eng: {
+        f: "Georgian",
+        m: "Georgian",
+      },
+      fra: {
+        f: "Géorgienne",
+        m: "Géorgien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/vu.png",
+      svg: "https://flagcdn.com/vu.svg",
+      alt: "The flag of Vanuatu is composed of two equal horizontal bands of red and green, with a black isosceles triangle superimposed on the hoist side of the field. This triangle has its base on the hoist end, spans about two-fifth the width of the field and is enclosed on its sides by the arms of a thin black-edged yellow horizontally oriented Y-shaped band which extends along the boundary of the red and green bands to the fly end of the field. A yellow boar's tusk encircling two yellow crossed namele leaves is centered in the triangle.",
+    },
+    name: {
+      common: "Vanuatu",
+      official: "Republic of Vanuatu",
+      nativeName: {
+        bis: {
+          official: "Ripablik blong Vanuatu",
+          common: "Vanuatu",
+        },
+        eng: {
+          official: "Republic of Vanuatu",
+          common: "Vanuatu",
+        },
+        fra: {
+          official: "République de Vanuatu",
+          common: "Vanuatu",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      VUV: {
+        name: "Vanuatu vatu",
+        symbol: "Vt",
+      },
+    },
+    capital: ["Port Vila"],
+    region: "Oceania",
+    subregion: "Melanesia",
+    languages: {
+      bis: "Bislama",
+      eng: "English",
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Ni-Vanuatu",
+        m: "Ni-Vanuatu",
+      },
+      fra: {
+        f: "Vanuatuane",
+        m: "Vanuatuan",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/kg.png",
+      svg: "https://flagcdn.com/kg.svg",
+      alt: "The flag of Kyrgyzstan features a yellow sun with forty rays at the center of a red field. At the center of the sun is a stylized depiction of a tunduk.",
+    },
+    name: {
+      common: "Kyrgyzstan",
+      official: "Kyrgyz Republic",
+      nativeName: {
+        kir: {
+          official: "Кыргыз Республикасы",
+          common: "Кыргызстан",
+        },
+        rus: {
+          official: "Кыргызская Республика",
+          common: "Киргизия",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      KGS: {
+        name: "Kyrgyzstani som",
+        symbol: "с",
+      },
+    },
+    capital: ["Bishkek"],
+    region: "Asia",
+    subregion: "Central Asia",
+    languages: {
+      kir: "Kyrgyz",
+      rus: "Russian",
+    },
+    demonyms: {
+      eng: {
+        f: "Kirghiz",
+        m: "Kirghiz",
+      },
+      fra: {
+        f: "Kirghize",
+        m: "Kirghize",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ne.png",
+      svg: "https://flagcdn.com/ne.svg",
+      alt: "The flag of Niger features three equal horizontal bands of orange, white and green, with an orange circle centered in the white band.",
+    },
+    name: {
+      common: "Niger",
+      official: "Republic of Niger",
+      nativeName: {
+        fra: {
+          official: "République du Niger",
+          common: "Niger",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      XOF: {
+        name: "West African CFA franc",
+        symbol: "Fr",
+      },
+    },
+    capital: ["Niamey"],
+    region: "Africa",
+    subregion: "Western Africa",
+    languages: {
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Nigerien",
+        m: "Nigerien",
+      },
+      fra: {
+        f: "Nigérienne",
+        m: "Nigérien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/cn.png",
+      svg: "https://flagcdn.com/cn.svg",
+      alt: "The flag of China has a red field. In the canton are five yellow five-pointed stars — a large star and four smaller stars arranged in a vertical arc on the fly side of the large star.",
+    },
+    name: {
+      common: "China",
+      official: "People's Republic of China",
+      nativeName: {
+        zho: {
+          official: "中华人民共和国",
+          common: "中国",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      CNY: {
+        name: "Chinese yuan",
+        symbol: "¥",
+      },
+    },
+    capital: ["Beijing"],
+    region: "Asia",
+    subregion: "Eastern Asia",
+    languages: {
+      zho: "Chinese",
+    },
+    demonyms: {
+      eng: {
+        f: "Chinese",
+        m: "Chinese",
+      },
+      fra: {
+        f: "Chinoise",
+        m: "Chinois",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/tv.png",
+      svg: "https://flagcdn.com/tv.svg",
+      alt: "The flag of Tuvalu has a light blue field with the flag of the United Kingdom — the Union Jack — in the canton. A representation of the country's nine Islands using nine five-pointed yellow stars is situated in the fly half of the field.",
+    },
+    name: {
+      common: "Tuvalu",
+      official: "Tuvalu",
+      nativeName: {
+        eng: {
+          official: "Tuvalu",
+          common: "Tuvalu",
+        },
+        tvl: {
+          official: "Tuvalu",
+          common: "Tuvalu",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      AUD: {
+        name: "Australian dollar",
+        symbol: "$",
+      },
+      TVD: {
+        name: "Tuvaluan dollar",
+        symbol: "$",
+      },
+    },
+    capital: ["Funafuti"],
+    region: "Oceania",
+    subregion: "Polynesia",
+    languages: {
+      eng: "English",
+      tvl: "Tuvaluan",
+    },
+    demonyms: {
+      eng: {
+        f: "Tuvaluan",
+        m: "Tuvaluan",
+      },
+      fra: {
+        f: "Tuvaluane",
+        m: "Tuvaluan",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/km.png",
+      svg: "https://flagcdn.com/km.svg",
+      alt: "The flag of Comoros is composed of four equal horizontal bands of yellow, white, red and blue, with a green isosceles triangle superimposed on the hoist side of the field. This triangle has its base on the hoist end, spans about two-fifth the width of the field and bears a fly-side facing white crescent and four five-pointed white stars arranged in a vertical line along the opening of the crescent.",
+    },
+    name: {
+      common: "Comoros",
+      official: "Union of the Comoros",
+      nativeName: {
+        ara: {
+          official: "الاتحاد القمري",
+          common: "القمر‎",
+        },
+        fra: {
+          official: "Union des Comores",
+          common: "Comores",
+        },
+        zdj: {
+          official: "Udzima wa Komori",
+          common: "Komori",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      KMF: {
+        name: "Comorian franc",
+        symbol: "Fr",
+      },
+    },
+    capital: ["Moroni"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      ara: "Arabic",
+      fra: "French",
+      zdj: "Comorian",
+    },
+    demonyms: {
+      eng: {
+        f: "Comoran",
+        m: "Comoran",
+      },
+      fra: {
+        f: "Comorienne",
+        m: "Comorien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ba.png",
+      svg: "https://flagcdn.com/ba.svg",
+      alt: "The flag of Bosnia and Herzegovina has a blue field, at the center of which is a large yellow hoist-side facing right-angled triangle that is based on the top edge and spans the height of the field. Adjacent to the hypotenuse of this triangle are nine adjoining five-pointed white stars with the top and bottom stars cut in half by the edges of the field.",
+    },
+    name: {
+      common: "Bosnia and Herzegovina",
+      official: "Bosnia and Herzegovina",
+      nativeName: {
+        bos: {
+          official: "Bosna i Hercegovina",
+          common: "Bosna i Hercegovina",
+        },
+        hrv: {
+          official: "Bosna i Hercegovina",
+          common: "Bosna i Hercegovina",
+        },
+        srp: {
+          official: "Босна и Херцеговина",
+          common: "Босна и Херцеговина",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      BAM: {
+        name: "Bosnia and Herzegovina convertible mark",
+        symbol: "KM",
+      },
+    },
+    capital: ["Sarajevo"],
+    region: "Europe",
+    subregion: "Southeast Europe",
+    languages: {
+      bos: "Bosnian",
+      hrv: "Croatian",
+      srp: "Serbian",
+    },
+    demonyms: {
+      eng: {
+        f: "Bosnian, Herzegovinian",
+        m: "Bosnian, Herzegovinian",
+      },
+      fra: {
+        f: "Bosnienne",
+        m: "Bosnien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/bh.png",
+      svg: "https://flagcdn.com/bh.svg",
+      alt: "The flag of Bahrain has a red field. On the hoist side, it features a white vertical band that spans about one-third the width of the field and is separated from the rest of the field by five adjoining fly-side pointing white isosceles triangles that serve as a serrated line.",
+    },
+    name: {
+      common: "Bahrain",
+      official: "Kingdom of Bahrain",
+      nativeName: {
+        ara: {
+          official: "مملكة البحرين",
+          common: "‏البحرين",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      BHD: {
+        name: "Bahraini dinar",
+        symbol: ".د.ب",
+      },
+    },
+    capital: ["Manama"],
+    region: "Asia",
+    subregion: "Western Asia",
+    languages: {
+      ara: "Arabic",
+    },
+    demonyms: {
+      eng: {
+        f: "Bahraini",
+        m: "Bahraini",
+      },
+      fra: {
+        f: "Bahreïnienne",
+        m: "Bahreïnien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/so.png",
+      svg: "https://flagcdn.com/so.svg",
+      alt: "The flag of Somalia features a large five-pointed white star centered on a light blue field.",
+    },
+    name: {
+      common: "Somalia",
+      official: "Federal Republic of Somalia",
+      nativeName: {
+        ara: {
+          official: "جمهورية الصومال‎‎",
+          common: "الصومال‎‎",
+        },
+        som: {
+          official: "Jamhuuriyadda Federaalka Soomaaliya",
+          common: "Soomaaliya",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      SOS: {
+        name: "Somali shilling",
+        symbol: "Sh",
+      },
+    },
+    capital: ["Mogadishu"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      ara: "Arabic",
+      som: "Somali",
+    },
+    demonyms: {
+      eng: {
+        f: "Somali",
+        m: "Somali",
+      },
+      fra: {
+        f: "Somalienne",
+        m: "Somalien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/bl.png",
+      svg: "https://flagcdn.com/bl.svg",
+      alt: "",
+    },
+    name: {
+      common: "Saint Barthélemy",
+      official: "Collectivity of Saint Barthélemy",
+      nativeName: {
+        fra: {
+          official: "Collectivité de Saint-Barthélemy",
+          common: "Saint-Barthélemy",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      EUR: {
+        name: "Euro",
+        symbol: "€",
+      },
+    },
+    capital: ["Gustavia"],
+    region: "Americas",
+    subregion: "Caribbean",
+    languages: {
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Saint Barthélemy Islander",
+        m: "Saint Barthélemy Islander",
+      },
+      fra: {
+        f: "Barthéloméenne",
+        m: "Barthéloméen",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/lv.png",
+      svg: "https://flagcdn.com/lv.svg",
+      alt: "The flag of Latvia has a carmine-red field with a thin white horizontal band across the middle of the field.",
+    },
+    name: {
+      common: "Latvia",
+      official: "Republic of Latvia",
+      nativeName: {
+        lav: {
+          official: "Latvijas Republikas",
+          common: "Latvija",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      EUR: {
+        name: "Euro",
+        symbol: "€",
+      },
+    },
+    capital: ["Riga"],
+    region: "Europe",
+    subregion: "Northern Europe",
+    languages: {
+      lav: "Latvian",
+    },
+    demonyms: {
+      eng: {
+        f: "Latvian",
+        m: "Latvian",
+      },
+      fra: {
+        f: "Lettone",
+        m: "Letton",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ky.png",
+      svg: "https://flagcdn.com/ky.svg",
+      alt: "",
+    },
+    name: {
+      common: "Cayman Islands",
+      official: "Cayman Islands",
+      nativeName: {
+        eng: {
+          official: "Cayman Islands",
+          common: "Cayman Islands",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      KYD: {
+        name: "Cayman Islands dollar",
+        symbol: "$",
+      },
+    },
+    capital: ["George Town"],
+    region: "Americas",
+    subregion: "Caribbean",
+    languages: {
+      eng: "English",
+    },
+    demonyms: {
+      eng: {
+        f: "Caymanian",
+        m: "Caymanian",
+      },
+      fra: {
+        f: "Caïmanienne",
+        m: "Caïmanien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/nl.png",
+      svg: "https://flagcdn.com/nl.svg",
+      alt: "The flag of the Netherlands is composed of three equal horizontal bands of red, white and blue.",
+    },
+    name: {
+      common: "Netherlands",
+      official: "Kingdom of the Netherlands",
+      nativeName: {
+        nld: {
+          official: "Koninkrijk der Nederlanden",
+          common: "Nederland",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      EUR: {
+        name: "Euro",
+        symbol: "€",
+      },
+    },
+    capital: ["Amsterdam"],
+    region: "Europe",
+    subregion: "Western Europe",
+    languages: {
+      nld: "Dutch",
+    },
+    demonyms: {
+      eng: {
+        f: "Dutch",
+        m: "Dutch",
+      },
+      fra: {
+        f: "Néerlandaise",
+        m: "Néerlandais",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ls.png",
+      svg: "https://flagcdn.com/ls.svg",
+      alt: "The flag of Lesotho is composed of three horizontal bands of blue, white and green in the ratio of 3:4:3. A black mokorotlo — a Basotho hat — is centered in the white band.",
+    },
+    name: {
+      common: "Lesotho",
+      official: "Kingdom of Lesotho",
+      nativeName: {
+        eng: {
+          official: "Kingdom of Lesotho",
+          common: "Lesotho",
+        },
+        sot: {
+          official: "Kingdom of Lesotho",
+          common: "Lesotho",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      LSL: {
+        name: "Lesotho loti",
+        symbol: "L",
+      },
+      ZAR: {
+        name: "South African rand",
+        symbol: "R",
+      },
+    },
+    capital: ["Maseru"],
+    region: "Africa",
+    subregion: "Southern Africa",
+    languages: {
+      eng: "English",
+      sot: "Sotho",
+    },
+    demonyms: {
+      eng: {
+        f: "Mosotho",
+        m: "Mosotho",
+      },
+      fra: {
+        f: "Lésothienne",
+        m: "Lésothien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ve.png",
+      svg: "https://flagcdn.com/ve.svg",
+      alt: "The flag of Venezuela is composed of three equal horizontal bands of yellow, blue and red. At the center of the blue band are eight five-pointed white stars arranged in a horizontal arc.",
+    },
+    name: {
+      common: "Venezuela",
+      official: "Bolivarian Republic of Venezuela",
+      nativeName: {
+        spa: {
+          official: "República Bolivariana de Venezuela",
+          common: "Venezuela",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      VES: {
+        name: "Venezuelan bolívar soberano",
+        symbol: "Bs.S.",
+      },
+    },
+    capital: ["Caracas"],
+    region: "Americas",
+    subregion: "South America",
+    languages: {
+      spa: "Spanish",
+    },
+    demonyms: {
+      eng: {
+        f: "Venezuelan",
+        m: "Venezuelan",
+      },
+      fra: {
+        f: "Vénézuélienne",
+        m: "Vénézuélien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/ke.png",
+      svg: "https://flagcdn.com/ke.svg",
+      alt: "The flag of Kenya is composed of three equal horizontal bands of black, red with white top and bottom edges, and green. An emblem comprising a red, black and white Maasai shield covering two crossed white spears is superimposed at the center of the field.",
+    },
+    name: {
+      common: "Kenya",
+      official: "Republic of Kenya",
+      nativeName: {
+        eng: {
+          official: "Republic of Kenya",
+          common: "Kenya",
+        },
+        swa: {
+          official: "Republic of Kenya",
+          common: "Kenya",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      KES: {
+        name: "Kenyan shilling",
+        symbol: "Sh",
+      },
+    },
+    capital: ["Nairobi"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      eng: "English",
+      swa: "Swahili",
+    },
+    demonyms: {
+      eng: {
+        f: "Kenyan",
+        m: "Kenyan",
+      },
+      fra: {
+        f: "Kényane",
+        m: "Kényan",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/tr.png",
+      svg: "https://flagcdn.com/tr.svg",
+      alt: "The flag of Turkey has a red field bearing a large fly-side facing white crescent and a smaller five-pointed white star placed just outside the crescent opening. The white crescent and star are offset slightly towards the hoist side of center.",
+    },
+    name: {
+      common: "Turkey",
+      official: "Republic of Turkey",
+      nativeName: {
+        tur: {
+          official: "Türkiye Cumhuriyeti",
+          common: "Türkiye",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      TRY: {
+        name: "Turkish lira",
+        symbol: "₺",
+      },
+    },
+    capital: ["Ankara"],
+    region: "Asia",
+    subregion: "Western Asia",
+    languages: {
+      tur: "Turkish",
+    },
+    demonyms: {
+      eng: {
+        f: "Turkish",
+        m: "Turkish",
+      },
+      fra: {
+        f: "Turque",
+        m: "Turc",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/fj.png",
+      svg: "https://flagcdn.com/fj.svg",
+      alt: "The flag of Fiji has a light blue field. It features the flag of the United Kingdom — the Union Jack — in the canton and the shield of the national coat of arms centered in the fly half.",
+    },
+    name: {
+      common: "Fiji",
+      official: "Republic of Fiji",
+      nativeName: {
+        eng: {
+          official: "Republic of Fiji",
+          common: "Fiji",
+        },
+        fij: {
+          official: "Matanitu Tugalala o Viti",
+          common: "Viti",
+        },
+        hif: {
+          official: "रिपब्लिक ऑफ फीजी",
+          common: "फिजी",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      FJD: {
+        name: "Fijian dollar",
+        symbol: "$",
+      },
+    },
+    capital: ["Suva"],
+    region: "Oceania",
+    subregion: "Melanesia",
+    languages: {
+      eng: "English",
+      fij: "Fijian",
+      hif: "Fiji Hindi",
+    },
+    demonyms: {
+      eng: {
+        f: "Fijian",
+        m: "Fijian",
+      },
+      fra: {
+        f: "Fidjienne",
+        m: "Fidjien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/tt.png",
+      svg: "https://flagcdn.com/tt.svg",
+      alt: "The flag of Trinidad and Tobago has a red field with a white-edged black diagonal band that extends from the upper hoist-side corner to the lower fly-side corner of the field.",
+    },
+    name: {
+      common: "Trinidad and Tobago",
+      official: "Republic of Trinidad and Tobago",
+      nativeName: {
+        eng: {
+          official: "Republic of Trinidad and Tobago",
+          common: "Trinidad and Tobago",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      TTD: {
+        name: "Trinidad and Tobago dollar",
+        symbol: "$",
+      },
+    },
+    capital: ["Port of Spain"],
+    region: "Americas",
+    subregion: "Caribbean",
+    languages: {
+      eng: "English",
+    },
+    demonyms: {
+      eng: {
+        f: "Trinidadian",
+        m: "Trinidadian",
+      },
+      fra: {
+        f: "Trinidadienne",
+        m: "Trinidadien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/hn.png",
+      svg: "https://flagcdn.com/hn.svg",
+      alt: "The flag of Honduras is composed of three equal horizontal bands of turquoise, white and turquoise, with five small five-pointed turquoise stars arranged in a quincuncial pattern at the center of the white band.",
+    },
+    name: {
+      common: "Honduras",
+      official: "Republic of Honduras",
+      nativeName: {
+        spa: {
+          official: "República de Honduras",
+          common: "Honduras",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      HNL: {
+        name: "Honduran lempira",
+        symbol: "L",
+      },
+    },
+    capital: ["Tegucigalpa"],
+    region: "Americas",
+    subregion: "Central America",
+    languages: {
+      spa: "Spanish",
+    },
+    demonyms: {
+      eng: {
+        f: "Honduran",
+        m: "Honduran",
+      },
+      fra: {
+        f: "Hondurienne",
+        m: "Hondurien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/je.png",
+      svg: "https://flagcdn.com/je.svg",
+      alt: "",
+    },
+    name: {
+      common: "Jersey",
+      official: "Bailiwick of Jersey",
+      nativeName: {
+        eng: {
+          official: "Bailiwick of Jersey",
+          common: "Jersey",
+        },
+        fra: {
+          official: "Bailliage de Jersey",
+          common: "Jersey",
+        },
+        nrf: {
+          official: "Bailliage dé Jèrri",
+          common: "Jèrri",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      GBP: {
+        name: "British pound",
+        symbol: "£",
+      },
+      JEP: {
+        name: "Jersey pound",
+        symbol: "£",
+      },
+    },
+    capital: ["Saint Helier"],
+    region: "Europe",
+    subregion: "Northern Europe",
+    languages: {
+      eng: "English",
+      fra: "French",
+      nrf: "Jèrriais",
+    },
+    demonyms: {
+      eng: {
+        f: "Channel Islander",
+        m: "Channel Islander",
+      },
+      fra: {
+        f: "Jersiaise",
+        m: "Jersiais",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/dj.png",
+      svg: "https://flagcdn.com/dj.svg",
+      alt: "The flag of Djibouti is composed of two equal horizontal bands of light blue and light green, with a white isosceles triangle superimposed on the hoist side of the field. The triangle has its base on the hoist end, spans about two-fifth the width of the field and bears a red five-pointed star at its center.",
+    },
+    name: {
+      common: "Djibouti",
+      official: "Republic of Djibouti",
+      nativeName: {
+        ara: {
+          official: "جمهورية جيبوتي",
+          common: "جيبوتي‎",
+        },
+        fra: {
+          official: "République de Djibouti",
+          common: "Djibouti",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      DJF: {
+        name: "Djiboutian franc",
+        symbol: "Fr",
+      },
+    },
+    capital: ["Djibouti"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      ara: "Arabic",
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Djibouti",
+        m: "Djibouti",
+      },
+      fra: {
+        f: "Djiboutienne",
+        m: "Djiboutien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/re.png",
+      svg: "https://flagcdn.com/re.svg",
+      alt: "",
+    },
+    name: {
+      common: "Réunion",
+      official: "Réunion Island",
+      nativeName: {
+        fra: {
+          official: "Ile de la Réunion",
+          common: "La Réunion",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      EUR: {
+        name: "Euro",
+        symbol: "€",
+      },
+    },
+    capital: ["Saint-Denis"],
+    region: "Africa",
+    subregion: "Eastern Africa",
+    languages: {
+      fra: "French",
+    },
+    demonyms: {
+      eng: {
+        f: "Réunionese",
+        m: "Réunionese",
+      },
+      fra: {
+        f: "Réunionnaise",
+        m: "Réunionnais",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/sz.png",
+      svg: "https://flagcdn.com/sz.svg",
+      alt: "The flag of Eswatini is composed of three horizontal bands — a large central yellow-edged red band, and a light blue band above and beneath the red band. The red band is three times the height of the blue bands and bears a centered emblem made up of a large black and white Nguni shield covering two spears and a staff decorated with feather tassels, all placed horizontally.",
+    },
+    name: {
+      common: "Eswatini",
+      official: "Kingdom of Eswatini",
+      nativeName: {
+        eng: {
+          official: "Kingdom of Eswatini",
+          common: "Eswatini",
+        },
+        ssw: {
+          official: "Umbuso weSwatini",
+          common: "eSwatini",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      SZL: {
+        name: "Swazi lilangeni",
+        symbol: "L",
+      },
+      ZAR: {
+        name: "South African rand",
+        symbol: "R",
+      },
+    },
+    capital: ["Mbabane"],
+    region: "Africa",
+    subregion: "Southern Africa",
+    languages: {
+      eng: "English",
+      ssw: "Swazi",
+    },
+    demonyms: {
+      eng: {
+        f: "Swazi",
+        m: "Swazi",
+      },
+      fra: {
+        f: "Swazie",
+        m: "Swazie",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/tj.png",
+      svg: "https://flagcdn.com/tj.svg",
+      alt: "The flag of Tajikistan is composed of three horizontal bands of red, white and green in the ratio of 2:3:2. A golden-yellow crown surmounted by an arc of seven five-pointed golden-yellow stars is centered in the white band.",
+    },
+    name: {
+      common: "Tajikistan",
+      official: "Republic of Tajikistan",
+      nativeName: {
+        rus: {
+          official: "Республика Таджикистан",
+          common: "Таджикистан",
+        },
+        tgk: {
+          official: "Ҷумҳурии Тоҷикистон",
+          common: "Тоҷикистон",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      TJS: {
+        name: "Tajikistani somoni",
+        symbol: "ЅМ",
+      },
+    },
+    capital: ["Dushanbe"],
+    region: "Asia",
+    subregion: "Central Asia",
+    languages: {
+      rus: "Russian",
+      tgk: "Tajik",
+    },
+    demonyms: {
+      eng: {
+        f: "Tadzhik",
+        m: "Tadzhik",
+      },
+      fra: {
+        f: "Tadjike",
+        m: "Tadjike",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/sa.png",
+      svg: "https://flagcdn.com/sa.svg",
+      alt: "The flag of Saudi Arabia has a green field, at the center of which is an Arabic inscription — the Shahada — in white above a white horizontal sabre with its tip pointed to the hoist side of the field.",
+    },
+    name: {
+      common: "Saudi Arabia",
+      official: "Kingdom of Saudi Arabia",
+      nativeName: {
+        ara: {
+          official: "المملكة العربية السعودية",
+          common: "العربية السعودية",
+        },
+      },
+    },
+    independent: true,
+    currencies: {
+      SAR: {
+        name: "Saudi riyal",
+        symbol: "ر.س",
+      },
+    },
+    capital: ["Riyadh"],
+    region: "Asia",
+    subregion: "Western Asia",
+    languages: {
+      ara: "Arabic",
+    },
+    demonyms: {
+      eng: {
+        f: "Saudi Arabian",
+        m: "Saudi Arabian",
+      },
+      fra: {
+        f: "Saoudienne",
+        m: "Saoudien",
+      },
+    },
+  },
+  {
+    flags: {
+      png: "https://flagcdn.com/w320/bm.png",
+      svg: "https://flagcdn.com/bm.svg",
+      alt: "",
+    },
+    name: {
+      common: "Bermuda",
+      official: "Bermuda",
+      nativeName: {
+        eng: {
+          official: "Bermuda",
+          common: "Bermuda",
+        },
+      },
+    },
+    independent: false,
+    currencies: {
+      BMD: {
+        name: "Bermudian dollar",
+        symbol: "$",
+      },
+    },
+    capital: ["Hamilton"],
+    region: "Americas",
+    subregion: "North America",
+    languages: {
+      eng: "English",
+    },
+    demonyms: {
+      eng: {
+        f: "Bermudian",
+        m: "Bermudian",
+      },
+      fra: {
+        f: "Bermudienne",
+        m: "Bermudien",
+      },
+    },
+  },
+];
+
+/* 
+
+export type CountryData = Country[];
+
+export interface Country {
+  flags: Flags;
+  name: Name;
   currencies: Currencies;
   capital: string[];
   region: string;

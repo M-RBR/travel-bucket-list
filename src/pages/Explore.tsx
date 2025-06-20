@@ -7,7 +7,7 @@ export default function Explore() {
   const [error, setError] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
-  // const [selectedCurrency, setSelectedCurrency] = useState<string>("");
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("");
   const [onlyNonIndependent, setOnlyNonIndependent] = useState<boolean>(false);
 
   async function fetchData() {
@@ -44,18 +44,16 @@ export default function Explore() {
     new Set(countries.map((country) => country.region))
   ).sort();
 
-  {
-    /* 
-
   // Extract unique currencies
   const allCurrencies = Array.from(
     new Set(
-      countries.flatMap((country) => Object.keys(country.currencies || {}))
+      countries.flatMap((country) =>
+        country.currencies
+          ? Object.values(country.currencies).map((c) => c.name)
+          : []
+      )
     )
-  ).sort(); 
-
-  */
-  }
+  ).sort();
 
   // Combined filters
   const filteredCountries = countries.filter((country) => {
@@ -66,20 +64,18 @@ export default function Explore() {
     const matchesRegion =
       selectedRegion === "" || country.region === selectedRegion;
 
-    {
-      /* 
-
     const matchesCurrency =
       selectedCurrency === "" ||
-      Object.keys(country.currencies || {}).includes(selectedCurrency);
-
-      */
-    }
+      Object.values(country.currencies || {})
+        .map((c) => c.name)
+        .includes(selectedCurrency);
 
     const matchesIndependence =
       !onlyNonIndependent || country.independent === false;
 
-    return matchesLanguage && matchesRegion && matchesIndependence;
+    return (
+      matchesLanguage && matchesRegion && matchesCurrency && matchesIndependence
+    );
   });
 
   return (
@@ -119,7 +115,7 @@ export default function Explore() {
           ))}
         </select>
 
-        {/*  
+        {/* Currency filter */}
         <select
           value={selectedCurrency}
           onChange={(e) => setSelectedCurrency(e.target.value)}
@@ -132,8 +128,6 @@ export default function Explore() {
             </option>
           ))}
         </select>
-
-        */}
       </div>
 
       <label className="text-white flex items-center justify-center gap-2">

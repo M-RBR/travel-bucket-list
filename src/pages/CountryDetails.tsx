@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import type { Country } from "../@types/Country";
 
 export default function CountryDetails() {
-  const { name } = useParams(); // React Router usually decodes this automatically
+  const { name } = useParams();
   const [country, setCountry] = useState<Country | null>(null);
   const [error, setError] = useState("");
 
@@ -13,7 +13,7 @@ export default function CountryDetails() {
         const res = await fetch(
           "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent,demonyms,subregion"
         );
-        if (!res.ok) throw new Error("Failed to fetch country data."); // More descriptive error
+        if (!res.ok) throw new Error("Failed to fetch country data.");
         const data: Country[] = await res.json();
 
         // Match by the common name directly, assuming useParams already decoded it
@@ -22,12 +22,12 @@ export default function CountryDetails() {
         );
 
         if (!matchedCountry) {
-          setError("Country not found."); // This error remains useful if no match
+          setError("Country not found.");
         } else {
           setCountry(matchedCountry);
         }
       } catch (err) {
-        console.error("Fetch error:", err); // Log the actual error for debugging
+        console.error("Fetch error:", err);
         setError("Failed to fetch country data.");
       }
     }

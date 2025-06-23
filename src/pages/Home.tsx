@@ -23,14 +23,18 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center px-4"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col px-4"
       style={{ backgroundImage: `url(${planetImage})` }}
     >
-      <h1 className="text-4xl sm:text-5xl text-white font-bold text-center mb-6 drop-shadow-lg">
-        Travel Bucket List
-      </h1>
+      {/* Title near top */}
+      <div className="pt-12 text-center">
+        <h1 className="text-5xl sm:text-6xl text-white font-bold drop-shadow-xl">
+          Travel Bucket List
+        </h1>
+      </div>
 
-      <div className="space-y-3">
+      {/* Flying text centered */}
+      <div className="flex-1 flex flex-col justify-center items-center space-y-6">
         {flyInTexts.map((text, i) => (
           <motion.p
             key={i}
@@ -38,7 +42,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={flyInVariants}
-            className="text-lg sm:text-xl text-white text-center font-medium drop-shadow-md"
+            className="text-2xl sm:text-3xl text-white text-center font-semibold drop-shadow-lg"
           >
             {text}
           </motion.p>
@@ -47,20 +51,3 @@ export default function Home() {
     </div>
   );
 }
-
-/*
-
-export default function Home() {
-  return (
-    <div className="min-h-screen p-4 text-center">
-      <h1 className="text-4xl font-bold mb-4 text-white">
-        🌍 Travel Bucket List ✈️
-      </h1>
-      <p className="text-xl text-white">
-        Discover countries around the world and track your dream destinations.
-      </p>
-    </div>
-  );
-}
-
-*/

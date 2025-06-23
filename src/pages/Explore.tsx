@@ -83,7 +83,7 @@ export default function Explore() {
   });
 
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen bg-gray-900  p-4">
       {error && <p className="text-red-500">{error}</p>}
 
       <h1 className="text-3xl font-bold text-center text-white mb-4">

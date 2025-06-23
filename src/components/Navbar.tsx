@@ -1,32 +1,30 @@
 import { NavLink } from "react-router";
 
 export default function Navbar() {
+  const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
+    `px-4 py-2 rounded-md text-base font-semibold transition duration-300 ${
+      isActive
+        ? "bg-white text-blue-900 shadow"
+        : "text-white hover:bg-blue-700"
+    }`;
+
   return (
-    <nav className="bg-blue-900 text-white px-4 py-3 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="space-x-4">
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? "underline" : "")}
-          >
+    <nav className="bg-blue-900 shadow-md w-full">
+      <div className="container mx-auto py-3 flex justify-between items-center">
+        <div>
+          <NavLink to="/" className={navLinkClasses}>
             🌍 Home
           </NavLink>
-          <NavLink
-            to="/explore"
-            className={({ isActive }) => (isActive ? "underline" : "")}
-          >
+        </div>
+
+        <div className="flex gap-10">
+          <NavLink to="/explore" className={navLinkClasses}>
             Explore
           </NavLink>
-          <NavLink
-            to="/signup"
-            className={({ isActive }) => (isActive ? "underline" : "")}
-          >
+          <NavLink to="/signup" className={navLinkClasses}>
             Sign Up
           </NavLink>
-          <NavLink
-            to="/login"
-            className={({ isActive }) => (isActive ? "underline" : "")}
-          >
+          <NavLink to="/login" className={navLinkClasses}>
             Login ✈️
           </NavLink>
         </div>

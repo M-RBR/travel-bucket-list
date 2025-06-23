@@ -3,9 +3,9 @@ import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen w-full text-white">
       <Navbar />
-      <main className="p-4">
+      <main className="w-full">
         <Outlet />
       </main>
     </div>

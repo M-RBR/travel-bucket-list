@@ -1,39 +1,24 @@
 import { useEffect, useState } from "react";
-import type { APIError, Country, CountryData } from "../@types/Country";
+import { useCountryContext } from "../context/CountryContext";
 import CountryCard from "../components/CountryCard";
 
 export default function Explore() {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const { countries, fetchCountries } = useCountryContext();
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedCurrency, setSelectedCurrency] = useState<string>("");
   const [onlyNonIndependent, setOnlyNonIndependent] = useState<boolean>(false);
-
-  async function fetchData() {
-    setError("");
-    setLoading(true);
-    try {
-      const response = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent,demonyms,subregion"
-      );
-      if (response.ok) {
-        const data: CountryData = await response.json();
-        setCountries(data);
-      } else {
-        const data: APIError = await response.json();
-        setError(data.error || "An error occurred while fetching data.");
-      }
-    } catch (error: unknown) {
-      setError("Failed to fetch country data.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchData();
+    const load = async () => {
+      setLoading(true);
+      if (countries.length === 0) {
+        await fetchCountries();
+      }
+      setLoading(false);
+    };
+    load();
   }, []);
 
   // Extract unique languages
@@ -48,7 +33,7 @@ export default function Explore() {
     new Set(countries.map((country) => country.region))
   ).sort();
 
-  // Extract unique currencies
+  // Extract unique currencies (use currency names)
   const allCurrencies = Array.from(
     new Set(
       countries.flatMap((country) =>
@@ -59,7 +44,7 @@ export default function Explore() {
     )
   ).sort();
 
-  // Combined filters
+  // Filter countries based on selected criteria
   const filteredCountries = countries.filter((country) => {
     const matchesLanguage =
       selectedLanguage === "" ||
@@ -83,9 +68,7 @@ export default function Explore() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900  p-4">
-      {error && <p className="text-red-500">{error}</p>}
-
+    <div className="min-h-screen bg-gray-900 p-4">
       <h1 className="text-3xl font-bold text-center text-white mb-4">
         Explore Countries
       </h1>

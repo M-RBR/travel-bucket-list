@@ -1,11 +1,16 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
+
+console.log("[Firebase Config] Env Vars:", import.meta.env);
+console.log(
+  "[Firebase Config] API Key:",
+  import.meta.env.VITE_FB_API_KEY || "UNDEFINED"
+);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ_hALchblbYfT3MUWx7U_7RGc99XUaXg",
+  apiKey: import.meta.env.VITE_FB_API_KEY,
   authDomain: "travel-bucket-list-d99b4.firebaseapp.com",
   projectId: "travel-bucket-list-d99b4",
   storageBucket: "travel-bucket-list-d99b4.firebasestorage.app",
@@ -14,4 +19,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);

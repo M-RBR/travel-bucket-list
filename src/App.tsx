@@ -1,9 +1,11 @@
 import { Outlet } from "react-router";
 import Navbar from "./components/Navbar";
-import { app } from "./firebaseConfig";
 
 export default function App() {
-  console.log(app);
+  // console.log(import.meta.env.VITE_FB_API_KEY);
+  // console.log("Env key:", import.meta.env.VITE_FB_API_KEY);
+  // console.log("All env vars:", import.meta.env);
+
   return (
     <div className="min-h-screen w-full text-white">
       <Navbar />

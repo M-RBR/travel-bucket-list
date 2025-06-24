@@ -10,6 +10,12 @@ import Login from "./pages/Login";
 import CountryDetails from "./pages/CountryDetails";
 import { CountryProvider } from "./context/CountryContext";
 
+console.log("[Main Entry] Env Vars:", import.meta.env);
+console.log(
+  "[Main Entry] API Key:",
+  import.meta.env.VITE_FB_API_KEY || "UNDEFINED"
+);
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <CountryProvider>

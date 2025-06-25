@@ -26,15 +26,12 @@ export default function Home() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col px-4"
       style={{ backgroundImage: `url(${planetImage})` }}
     >
-      {/* Title near top */}
-      <div className="pt-12 text-center">
-        <h1 className="text-5xl sm:text-6xl text-white font-bold drop-shadow-xl">
+      <div className="pt-10 sm:pt-12 text-center">
+        <h1 className="text-4xl sm:text-6xl text-white font-bold drop-shadow-xl">
           Travel Bucket List
         </h1>
       </div>
-
-      {/* Flying text centered */}
-      <div className="flex-1 flex flex-col justify-center items-center space-y-6">
+      <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6 px-2">
         {flyInTexts.map((text, i) => (
           <motion.p
             key={i}
@@ -42,7 +39,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={flyInVariants}
-            className="text-2xl sm:text-3xl text-white text-center font-semibold drop-shadow-lg"
+            className="text-2xl sm:text-4xl text-white text-center font-semibold drop-shadow-lg"
           >
             {text}
           </motion.p>

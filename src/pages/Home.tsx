@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 import planetImage from "../assets/planet-earth.jpg";
 
 export default function Home() {
@@ -26,12 +27,15 @@ export default function Home() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col px-4"
       style={{ backgroundImage: `url(${planetImage})` }}
     >
+      {/* Title */}
       <div className="pt-10 sm:pt-12 text-center">
         <h1 className="text-4xl sm:text-6xl text-white font-bold drop-shadow-xl">
           Travel Bucket List
         </h1>
       </div>
-      <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6 px-2">
+
+      {/* Fly-in texts and button */}
+      <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6 px-2 flex flex-col items-center">
         {flyInTexts.map((text, i) => (
           <motion.p
             key={i}
@@ -44,6 +48,21 @@ export default function Home() {
             {text}
           </motion.p>
         ))}
+
+        {/* Fly-in button as fourth item */}
+        <motion.div
+          custom={flyInTexts.length}
+          initial="hidden"
+          animate="visible"
+          variants={flyInVariants}
+        >
+          <Link
+            to="/explore"
+            className="mt-4 inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg sm:text-xl px-6 py-3 rounded-md shadow transition"
+          >
+            Start Exploring <span className="ml-2">→</span>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );

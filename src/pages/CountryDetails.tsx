@@ -1,39 +1,34 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useCountryContext } from "../context/CountryContext";
 import type { Country } from "../@types/Country";
 
 export default function CountryDetails() {
   const { name } = useParams();
+  const { countries, fetchCountries } = useCountryContext();
+
   const [country, setCountry] = useState<Country | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function fetchCountry() {
-      try {
-        const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,languages,currencies,independent,demonyms,subregion"
-        );
-        if (!res.ok) throw new Error("Failed to fetch country data.");
-        const data: Country[] = await res.json();
+    async function loadCountry() {
+      if (countries.length === 0) {
+        await fetchCountries();
+      }
 
-        // Match by the common name directly, assuming useParams already decoded it
-        const matchedCountry = data.find(
-          (c) => c.name.common.toLowerCase() === (name || "").toLowerCase()
-        );
+      const matchedCountry = countries.find(
+        (c) => c.name.common.toLowerCase() === (name || "").toLowerCase()
+      );
 
-        if (!matchedCountry) {
-          setError("Country not found.");
-        } else {
-          setCountry(matchedCountry);
-        }
-      } catch (err) {
-        console.error("Fetch error:", err);
-        setError("Failed to fetch country data.");
+      if (!matchedCountry) {
+        setError("Country not found.");
+      } else {
+        setCountry(matchedCountry);
       }
     }
 
-    fetchCountry();
-  }, [name]); // Dependency array is correct
+    loadCountry();
+  }, [countries, name]);
 
   if (error) {
     return <p className="text-red-500 text-center">{error}</p>;
@@ -43,7 +38,6 @@ export default function CountryDetails() {
     return <p className="text-white text-center">Loading country details...</p>;
   }
 
-  // Rest of your component remains the same
   const languages = country.languages
     ? Object.values(country.languages).join(", ")
     : "N/A";
@@ -64,7 +58,7 @@ export default function CountryDetails() {
         alt={country.flags.alt || "Country flag"}
         className="w-60 h-40 object-cover rounded mb-4"
       />
-      <ul className="text-lg space-y-2">
+      <ul className="text-lg space-y-2 text-center">
         <li>
           <strong>Capital(s):</strong>{" "}
           {country.capital?.length ? country.capital.join(", ") : "None"}

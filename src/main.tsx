@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import CountryDetails from "./pages/CountryDetails";
 import { CountryProvider } from "./context/CountryContext";
+import { AuthProvider } from "./context/AuthContext";
 
 console.log("[Main Entry] Env Vars:", import.meta.env);
 console.log(
@@ -18,16 +19,18 @@ console.log(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <CountryProvider>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="explore" element={<Explore />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="login" element={<Login />} />
-          <Route path="country/:name" element={<CountryDetails />} />
-        </Route>
-      </Routes>
-    </CountryProvider>
+    <AuthProvider>
+      <CountryProvider>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="explore" element={<Explore />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<Login />} />
+            <Route path="country/:name" element={<CountryDetails />} />
+          </Route>
+        </Routes>
+      </CountryProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

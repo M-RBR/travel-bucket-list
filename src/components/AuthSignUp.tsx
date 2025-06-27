@@ -27,7 +27,9 @@ export default function AuthSignUp() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-white mb-6">Sign Up</h2>
+      <h2 className="text-2xl font-bold text-white mb-6 text-center">
+        Sign Up
+      </h2>
       {error && (
         <div className="mb-4 p-2 bg-red-500 text-white rounded-md">{error}</div>
       )}
@@ -67,7 +69,7 @@ export default function AuthSignUp() {
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
-      <p className="mt-4 text-gray-300">
+      <p className="mt-4 text-gray-300 text-center">
         Already have an account?{" "}
         <Link to="/login" className="text-blue-400 hover:underline">
           Log In

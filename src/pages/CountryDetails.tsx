@@ -101,7 +101,6 @@ export default function CountryDetails() {
         )}
 
         <div className="flex flex-col items-center gap-4 w-full">
-          {" "}
           <button
             onClick={handleAddToBucketList}
             className="w-full flex justify-center items-center bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold text-lg sm:text-xl px-6 py-3 rounded-md shadow transition"

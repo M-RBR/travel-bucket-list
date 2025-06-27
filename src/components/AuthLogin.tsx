@@ -48,7 +48,7 @@ export default function AuthLogin() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-white mb-6">Log In</h2>
+      <h2 className="text-2xl font-bold text-white mb-6 text-center">Log In</h2>
       {error && (
         <div className="mb-4 p-2 bg-red-500 text-white rounded-md">{error}</div>
       )}
@@ -88,13 +88,13 @@ export default function AuthLogin() {
           {loading ? "Logging In..." : "Log In"}
         </button>
       </form>
-      <p className="mt-4 text-gray-300">
+      <p className="mt-4 text-gray-300 text-center">
         Don't have an account?{" "}
         <Link to="/signup" className="text-blue-400 hover:underline">
           Sign Up
         </Link>
       </p>
-      <p className="mt-2 text-gray-300">
+      <p className="mt-2 text-gray-300 text-center">
         <Link to="/forgot-password" className="text-blue-400 hover:underline">
           Forgot Password?
         </Link>

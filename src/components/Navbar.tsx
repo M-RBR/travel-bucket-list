@@ -1,6 +1,9 @@
 import { NavLink } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `block w-full sm:w-auto text-center px-4 py-2 rounded-md text-base font-semibold transition duration-300 ${
       isActive
@@ -16,6 +19,7 @@ export default function Navbar() {
             🌍 Home
           </NavLink>
         </div>
+
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
           <NavLink to="/explore" className={navLinkClasses}>
             Explore
@@ -23,12 +27,24 @@ export default function Navbar() {
           <NavLink to="/signup" className={navLinkClasses}>
             Sign Up
           </NavLink>
-          <NavLink to="/login" className={navLinkClasses}>
-            Login ✈️
-          </NavLink>
-          <NavLink to="/bucketlist" className={navLinkClasses}>
-            Bucket List
-          </NavLink>
+          {!user && (
+            <NavLink to="/login" className={navLinkClasses}>
+              Login ✈️
+            </NavLink>
+          )}
+          {user && (
+            <button
+              onClick={logout}
+              className="block w-full sm:w-auto text-center px-4 py-2 rounded-md text-base font-semibold transition duration-300 text-white"
+            >
+              Logout
+            </button>
+          )}
+          {user && (
+            <NavLink to="/bucketlist" className={navLinkClasses}>
+              Bucket List
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>

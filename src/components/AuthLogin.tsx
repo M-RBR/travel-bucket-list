@@ -94,11 +94,6 @@ export default function AuthLogin() {
           Sign Up
         </Link>
       </p>
-      <p className="mt-2 text-gray-300 text-center">
-        <Link to="/forgot-password" className="text-blue-400 hover:underline">
-          Forgot Password?
-        </Link>
-      </p>
     </div>
   );
 }

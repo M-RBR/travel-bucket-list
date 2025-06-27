@@ -1,24 +1,32 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function AuthSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSuccess("");
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User created successfully!");
+      setSuccess("Sign-up successful! Redirecting to Explore page...");
+
+      setTimeout(() => {
+        navigate("/explore");
+      }, 2000);
     } catch (err) {
-      setError((err as Error).message); // terminal problem: "'err' is of type 'unknown'", solution: Type Assertion (not sure if its safe)
+      setError((err as Error).message);
       console.error("Sign-up error:", err);
     } finally {
       setLoading(false);
@@ -30,9 +38,17 @@ export default function AuthSignUp() {
       <h2 className="text-2xl font-bold text-white mb-6 text-center">
         Sign Up
       </h2>
+
       {error && (
         <div className="mb-4 p-2 bg-red-500 text-white rounded-md">{error}</div>
       )}
+
+      {success && (
+        <div className="mb-4 p-2 bg-green-500 text-white rounded-md">
+          {success}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-white mb-1">
@@ -69,6 +85,7 @@ export default function AuthSignUp() {
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
+
       <p className="mt-4 text-gray-300 text-center">
         Already have an account?{" "}
         <Link to="/login" className="text-blue-400 hover:underline">

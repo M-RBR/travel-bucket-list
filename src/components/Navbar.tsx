@@ -42,7 +42,7 @@ export default function Navbar() {
           )}
           {user && (
             <NavLink to="/bucketlist" className={navLinkClasses}>
-              Bucket List
+              My Bucket List
             </NavLink>
           )}
         </div>

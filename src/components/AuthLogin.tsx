@@ -1,8 +1,11 @@
+// src/components/AuthLogin.tsx
+
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../firebaseConfig";
 import { Link, useNavigate } from "react-router";
+import { getFriendlyAuthError } from "../utils/authErrors";
 
 export default function AuthLogin() {
   const [email, setEmail] = useState("");
@@ -28,7 +31,7 @@ export default function AuthLogin() {
       }
     } catch (err) {
       if (err instanceof FirebaseError) {
-        setError(getFriendlyErrorMessage(err.code));
+        setError(getFriendlyAuthError(err.code));
       } else {
         setError("An unknown error occurred");
       }
@@ -37,28 +40,14 @@ export default function AuthLogin() {
     }
   };
 
-  // Helper function to convert Firebase error codes to user-friendly messages
-  const getFriendlyErrorMessage = (code: string) => {
-    switch (code) {
-      case "auth/invalid-email":
-        return "Invalid email address";
-      case "auth/user-disabled":
-        return "This account has been disabled";
-      case "auth/user-not-found":
-        return "No account found with this email";
-      case "auth/wrong-password":
-        return "Incorrect password";
-      default:
-        return "Login failed. Please try again.";
-    }
-  };
-
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-white mb-6 text-center">Log In</h2>
+
       {error && (
         <div className="mb-4 p-2 bg-red-500 text-white rounded-md">{error}</div>
       )}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-white mb-1">
@@ -95,6 +84,7 @@ export default function AuthLogin() {
           {loading ? "Logging In..." : "Log In"}
         </button>
       </form>
+
       <p className="mt-4 text-gray-300 text-center">
         Don't have an account?{" "}
         <Link to="/signup" className="text-blue-400 hover:underline">

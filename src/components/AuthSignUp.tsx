@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "../firebaseConfig";
 import { Link, useNavigate } from "react-router";
+import { getFriendlyAuthError } from "../utils/authErrors";
 
 export default function AuthSignUp() {
   const [email, setEmail] = useState("");
@@ -20,7 +22,6 @@ export default function AuthSignUp() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created successfully!");
       setSuccess("Sign-up successful! Redirecting...");
 
       setTimeout(() => {
@@ -33,8 +34,11 @@ export default function AuthSignUp() {
         }
       }, 2000);
     } catch (err) {
-      setError((err as Error).message);
-      console.error("Sign-up error:", err);
+      if (err instanceof FirebaseError) {
+        setError(getFriendlyAuthError(err.code));
+      } else {
+        setError("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }
@@ -49,7 +53,6 @@ export default function AuthSignUp() {
       {error && (
         <div className="mb-4 p-2 bg-red-500 text-white rounded-md">{error}</div>
       )}
-
       {success && (
         <div className="mb-4 p-2 bg-green-500 text-white rounded-md">
           {success}

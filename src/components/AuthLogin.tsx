@@ -18,7 +18,14 @@ export default function AuthLogin() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/"); // Now redirect to home, perhaps change to explore.
+
+      const returnTo = localStorage.getItem("returnTo");
+      if (returnTo) {
+        localStorage.removeItem("returnTo");
+        navigate(returnTo);
+      } else {
+        navigate("/explore");
+      }
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(getFriendlyErrorMessage(err.code));

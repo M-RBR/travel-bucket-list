@@ -11,6 +11,7 @@ export default function AuthSignUp() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -20,10 +21,16 @@ export default function AuthSignUp() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User created successfully!");
-      setSuccess("Sign-up successful! Redirecting to Explore page...");
+      setSuccess("Sign-up successful! Redirecting...");
 
       setTimeout(() => {
-        navigate("/explore");
+        const returnTo = localStorage.getItem("returnTo");
+        if (returnTo) {
+          localStorage.removeItem("returnTo");
+          navigate(returnTo);
+        } else {
+          navigate("/explore");
+        }
       }, 2000);
     } catch (err) {
       setError((err as Error).message);

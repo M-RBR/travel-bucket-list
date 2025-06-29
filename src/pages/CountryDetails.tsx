@@ -36,6 +36,8 @@ export default function CountryDetails() {
 
   function handleAddToBucketList() {
     if (!user) {
+      // Save return path (e.g., "/country/Germany")
+      localStorage.setItem("returnTo", window.location.pathname);
       setShowModal(true);
     } else {
       // TODO: Add logic to persist country (Firebase or local)

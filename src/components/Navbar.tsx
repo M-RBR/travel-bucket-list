@@ -35,7 +35,7 @@ export default function Navbar() {
           {user && (
             <button
               onClick={logout}
-              className="block w-full sm:w-auto text-center px-4 py-2 rounded-md text-base font-semibold transition duration-300 text-white"
+              className={navLinkClasses({ isActive: false })}
             >
               Logout
             </button>

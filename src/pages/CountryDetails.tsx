@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router";
 import { useCountryContext } from "../context/CountryContext";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import type { Country } from "../@types/Country";
 
 export default function CountryDetails() {
@@ -52,6 +52,14 @@ export default function CountryDetails() {
         country.name.common.toLowerCase()
       );
 
+      const existingDoc = await getDoc(bucketDocRef);
+      if (existingDoc.exists()) {
+        setError("Country already added to your bucket list.");
+        setSuccessMsg("");
+        setTimeout(() => setError(""), 4000);
+        return;
+      }
+
       await setDoc(bucketDocRef, {
         name: { common: country.name.common },
         flags: {
@@ -67,15 +75,11 @@ export default function CountryDetails() {
       });
 
       setSuccessMsg(`${country.name.common} added to your bucket list!`);
-      setTimeout(() => setSuccessMsg(""), 3000);
+      setTimeout(() => setSuccessMsg(""), 4000);
     } catch (err) {
       console.error("Error adding to Firestore:", err);
       setError("Failed to add to your bucket list. Try again later.");
     }
-  }
-
-  if (error) {
-    return <p className="text-red-500 text-center">{error}</p>;
   }
 
   if (!country) {
@@ -127,7 +131,13 @@ export default function CountryDetails() {
         </ul>
 
         {successMsg && (
-          <p className="text-green-400 text-center mb-4">{successMsg}</p>
+          <p className="text-green-400 text-center text-2xl mb-4">
+            {successMsg}
+          </p>
+        )}
+
+        {error && (
+          <p className="text-red-500 text-center text-2xl mb-4">{error}</p>
         )}
 
         <div className="flex flex-col items-center gap-4 w-full">

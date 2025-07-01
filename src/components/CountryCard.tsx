@@ -35,9 +35,9 @@ export default function CountryCard({ country, onDelete }: Props) {
         {onDelete && (
           <button
             onClick={handleRemove}
-            className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded transition duration-200"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 rounded transition duration-200"
           >
-            Remove
+            Remove from Bucket List
           </button>
         )}
       </div>

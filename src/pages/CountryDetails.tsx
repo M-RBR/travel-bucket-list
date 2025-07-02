@@ -59,7 +59,7 @@ export default function CountryDetails() {
 
       const existingDoc = await getDoc(bucketDocRef);
       if (existingDoc.exists()) {
-        setError("Country already added to your bucket list.");
+        setError("Country was already added to bucket list.");
         setSuccessMsg("");
         setTimeout(() => setError(""), 4000);
         return;

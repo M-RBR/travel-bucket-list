@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebaseConfig";
 import {
@@ -25,6 +25,7 @@ export default function ChatroomDetail() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate(); // <-- Add this
 
   useEffect(() => {
     if (user && countryName) {
@@ -113,7 +114,7 @@ export default function ChatroomDetail() {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSendMessage();
             }}
-            className="flex-grow px-4 py-2 rounded text-black"
+            className="flex-grow px-4 py-2 rounded text-white bg-gray-600"
             placeholder="Type your message..."
           />
           <button
@@ -124,6 +125,13 @@ export default function ChatroomDetail() {
           </button>
         </div>
       </div>
+
+      <button
+        onClick={() => navigate("/bucketlist")}
+        className="mt-6 bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded shadow-md transition"
+      >
+        ← Go back to Bucket List
+      </button>
     </div>
   );
 }

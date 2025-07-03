@@ -60,7 +60,7 @@ export default function Home() {
             to="/explore"
             className="mt-4 inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg sm:text-xl px-6 py-3 rounded-md shadow transition"
           >
-            Start Exploring <span className="ml-2">→</span>
+            Start Exploring
           </Link>
         </motion.div>
       </div>

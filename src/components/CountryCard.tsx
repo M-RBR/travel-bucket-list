@@ -4,7 +4,6 @@ import type { Country } from "../@types/Country";
 type Props = {
   country: Country;
   onDelete?: (name: string) => void;
-  // NEW PROP: Indicates if this card is rendered within the bucket list context
   isFromBucketListContext?: boolean;
 };
 
@@ -19,7 +18,6 @@ export default function CountryCard({
     }
   };
 
-  // Conditionally construct the 'to' URL based on the new prop
   const countryDetailsPath = isFromBucketListContext
     ? `/country/${encodeURIComponent(country.name.common)}?from=bucketlist`
     : `/country/${encodeURIComponent(country.name.common)}`;
@@ -38,18 +36,20 @@ export default function CountryCard({
       <div className="flex flex-col gap-2 mt-4 items-center">
         <div className="w-8/12 sm:w-3/4 flex flex-col gap-2">
           <Link
-            to={countryDetailsPath} // Use the conditionally generated path
+            to={countryDetailsPath}
             className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 rounded transition duration-200 text-center"
           >
             More Info
           </Link>
 
-          <Link
-            to={`/chat/${encodeURIComponent(country.name.common)}`}
-            className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded transition duration-200 text-center"
-          >
-            Enter Chatroom
-          </Link>
+          {isFromBucketListContext && (
+            <Link
+              to={`/chat/${encodeURIComponent(country.name.common)}`}
+              className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded transition duration-200 text-center"
+            >
+              Enter Chatroom
+            </Link>
+          )}
 
           {onDelete && (
             <button

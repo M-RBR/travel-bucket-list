@@ -7,10 +7,12 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import BucketList from "./pages/BucketList";
+import Chatrooms from "./pages/Chatrooms";
+import ChatroomDetail from "./pages/ChatroomDetail";
 import CountryDetails from "./pages/CountryDetails";
 import { CountryProvider } from "./context/CountryContext";
 import { AuthProvider } from "./context/AuthContext";
-import BucketList from "./pages/BucketList";
 
 console.log("[Main Entry] Env Vars:", import.meta.env);
 console.log(
@@ -30,6 +32,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             <Route path="bucketlist" element={<BucketList />} />
+            <Route path="chatrooms" element={<Chatrooms />} />
+            <Route path="/chat/:countryName" element={<ChatroomDetail />} />
           </Route>
         </Routes>
       </CountryProvider>

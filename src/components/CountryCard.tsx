@@ -44,6 +44,13 @@ export default function CountryCard({
             More Info
           </Link>
 
+          <Link
+            to={`/chat/${encodeURIComponent(country.name.common)}`}
+            className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded transition duration-200 text-center"
+          >
+            Enter Chatroom
+          </Link>
+
           {onDelete && (
             <button
               onClick={handleRemove}

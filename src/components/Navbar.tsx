@@ -49,6 +49,11 @@ export default function Navbar() {
               My Bucket List
             </NavLink>
           )}
+          {user && (
+            <NavLink to="/chatrooms" className={navLinkClasses}>
+              Chatrooms
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router";
-import planetImage from "../assets/planet-earth.jpg";
+import planetImage from "../assets/planet-earth11.jpg";
 
 export default function Home() {
   const flyInVariants = {

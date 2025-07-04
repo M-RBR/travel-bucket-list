@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebaseConfig";
 import { collection, query, getDocs } from "firebase/firestore";
 
-export default function Chatrooms() {
+export default function Forum() {
   const { user } = useAuth();
   const [joinedRooms, setJoinedRooms] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ export default function Chatrooms() {
   useEffect(() => {
     const loadRooms = async () => {
       if (!user) return;
-      const userRoomsRef = collection(db, "users", user.uid, "joinedChatrooms");
+      const userRoomsRef = collection(db, "users", user.uid, "joinedForum");
       const q = query(userRoomsRef);
       const snapshot = await getDocs(q);
       const rooms = snapshot.docs.map((doc) => doc.id);
@@ -24,16 +24,16 @@ export default function Chatrooms() {
 
   if (!user)
     return (
-      <p className="text-white text-center">Please log in to view chatrooms.</p>
+      <p className="text-white text-center">Please log in to view forum.</p>
     );
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-3xl font-bold mb-4">Your Chatrooms</h1>
+      <h1 className="text-3xl font-bold mb-4">Your Forums</h1>
       {loading ? (
-        <p>Loading chatrooms...</p>
+        <p>Loading forum...</p>
       ) : joinedRooms.length === 0 ? (
-        <p>You haven't joined any chatrooms yet.</p>
+        <p>You haven't joined any forum yet.</p>
       ) : (
         <ul className="space-y-2">
           {joinedRooms.map((room) => (

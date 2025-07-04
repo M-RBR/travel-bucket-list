@@ -50,8 +50,8 @@ export default function Navbar() {
             </NavLink>
           )}
           {user && (
-            <NavLink to="/chatrooms" className={navLinkClasses}>
-              Chatrooms
+            <NavLink to="/forum" className={navLinkClasses}>
+              Travel Forum
             </NavLink>
           )}
         </div>

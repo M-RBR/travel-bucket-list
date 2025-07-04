@@ -8,8 +8,8 @@ import Explore from "./pages/Explore";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import BucketList from "./pages/BucketList";
-import Chatrooms from "./pages/Chatrooms";
-import ChatroomDetail from "./pages/ChatroomDetail";
+import Forum from "./pages/Forum";
+import ForumDetail from "./pages/ForumDetail";
 import CountryDetails from "./pages/CountryDetails";
 import { CountryProvider } from "./context/CountryContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -32,8 +32,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             <Route path="bucketlist" element={<BucketList />} />
-            <Route path="chatrooms" element={<Chatrooms />} />
-            <Route path="/chat/:countryName" element={<ChatroomDetail />} />
+            <Route path="forum" element={<Forum />} />
+            <Route path="/chat/:countryName" element={<ForumDetail />} />
           </Route>
         </Routes>
       </CountryProvider>

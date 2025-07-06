@@ -1,4 +1,4 @@
-/* 
+/*
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
@@ -195,9 +195,10 @@ export default function ForumDetail() {
                   setEditedText={setEditedText}
                   setEditingPostId={setEditingPostId}
                   onPostReply={() => handleReply(p)}
-                  onEdit={() => handleEdit(p.id, p.text)}
-                  onDelete={() => handleDelete(p.id)}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
                   onSaveEdit={handleSaveEdit}
+                  userEmail={user.email}
                 />
               );
             })
@@ -253,6 +254,7 @@ function PostBlock({
   onEdit,
   onDelete,
   onSaveEdit,
+  userEmail,
 }: {
   post: PostWithReplies;
   isOwner: boolean;
@@ -265,9 +267,10 @@ function PostBlock({
   setEditedText: (txt: string) => void;
   setEditingPostId: (id: string | null) => void;
   onPostReply: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
+  onEdit: (id: string, text: string) => void;
+  onDelete: (id: string) => void;
   onSaveEdit: () => void;
+  userEmail?: string | null;
 }) {
   const relativeTime = post.createdAt?.toDate
     ? formatDistanceToNow(post.createdAt.toDate(), { addSuffix: true })
@@ -321,13 +324,13 @@ function PostBlock({
             {isOwner && (
               <>
                 <button
-                  onClick={onEdit}
+                  onClick={() => onEdit(post.id, post.text)}
                   className="text-yellow-400 hover:underline"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={onDelete}
+                  onClick={() => onDelete(post.id)}
                   className="text-red-400 hover:underline"
                 >
                   Delete
@@ -374,6 +377,7 @@ function PostBlock({
                   addSuffix: true,
                 })
               : "Just now";
+            const replyIsOwner = reply.sender === userEmail;
 
             return (
               <div key={reply.id} className="bg-gray-700 p-3 rounded">
@@ -381,7 +385,58 @@ function PostBlock({
                   <span className="font-semibold">{reply.sender}</span>
                   <span>{replyTime}</span>
                 </div>
-                <p className="text-white">{reply.text}</p>
+
+                {editingPostId === reply.id ? (
+                  <>
+                    <textarea
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                      className="w-full bg-gray-500 text-white p-2 rounded resize-none mb-2"
+                      rows={3}
+                    />
+                    <div className="flex justify-end gap-2">
+                      <button
+                        onClick={() => {
+                          setEditingPostId(null);
+                          setEditedText("");
+                        }}
+                        className="text-sm bg-gray-400 px-3 py-1 rounded"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={onSaveEdit}
+                        className="text-sm bg-green-500 hover:bg-green-600 px-3 py-1 rounded"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-white">{reply.text}</p>
+                    {replyIsOwner && (
+                      <div className="flex gap-4 text-sm text-gray-200 mt-2">
+                        <button
+                          onClick={() => {
+                            onEdit(reply.id, reply.text);
+                            setEditingPostId(reply.id);
+                            setEditedText(reply.text);
+                          }}
+                          className="text-yellow-400 hover:underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => onDelete(reply.id)}
+                          className="text-red-400 hover:underline"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             );
           })}
@@ -412,7 +467,6 @@ import {
   startAfter,
 } from "firebase/firestore";
 import type { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
-import { joinForum } from "../utils/joinForum";
 import { formatDistanceToNow } from "date-fns";
 
 type Post = {
@@ -444,7 +498,6 @@ export default function ForumDetail() {
 
   useEffect(() => {
     if (user && countryName) {
-      joinForum(user.uid, countryName);
       loadPosts();
     }
   }, [user, countryName]);

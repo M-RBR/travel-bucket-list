@@ -27,14 +27,12 @@ export default function Home() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col px-4"
       style={{ backgroundImage: `url(${planetImage})` }}
     >
-      {/* Title */}
       <div className="pt-10 sm:pt-12 text-center">
         <h1 className="text-4xl sm:text-6xl text-white font-bold drop-shadow-xl">
           Travel Bucket List
         </h1>
       </div>
 
-      {/* Fly-in texts and button */}
       <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6 px-2 flex flex-col items-center">
         {flyInTexts.map((text, i) => (
           <motion.p
@@ -49,7 +47,6 @@ export default function Home() {
           </motion.p>
         ))}
 
-        {/* Fly-in button as fourth item */}
         <motion.div
           custom={flyInTexts.length}
           initial="hidden"

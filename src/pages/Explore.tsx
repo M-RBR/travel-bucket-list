@@ -12,7 +12,6 @@ export default function Explore() {
   const [loading, setLoading] = useState<boolean>(true);
   const [shuffledCountries, setShuffledCountries] = useState<any[]>([]);
 
-  // Load countries + restore filters from localStorage
   useEffect(() => {
     const load = async () => {
       setLoading(true);
@@ -36,7 +35,6 @@ export default function Explore() {
     load();
   }, []);
 
-  // Save filters to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(
       "exploreFilters",
@@ -119,7 +117,6 @@ export default function Explore() {
         Explore Countries
       </h1>
 
-      {/* Filter dropdowns */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
         <select
           value={selectedLanguage}
@@ -170,7 +167,6 @@ export default function Explore() {
         </select>
       </div>
 
-      {/* Checkbox + Buttons */}
       <div className="flex flex-col items-center gap-4 mb-6">
         <label className="text-white flex items-center gap-2">
           <input
@@ -200,7 +196,6 @@ export default function Explore() {
         </div>
       </div>
 
-      {/* Country Cards */}
       {loading ? (
         <p className="text-white text-center mt-10 text-xl animate-pulse">
           Loading countries...

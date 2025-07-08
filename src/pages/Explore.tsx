@@ -112,8 +112,8 @@ export default function Explore() {
   ).sort();
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
-      <h1 className="text-3xl font-bold text-center text-white mb-4">
+    <div className="min-h-screen w-full bg-gray-900 bg-cover bg-center bg-no-repeat flex flex-col px-4">
+      <h1 className="text-4xl font-bold text-center text-white mb-4 p-10">
         Explore Countries
       </h1>
 
@@ -124,7 +124,7 @@ export default function Explore() {
             setSelectedLanguage(e.target.value);
             setShuffledCountries([]);
           }}
-          className="p-2 rounded bg-gray-500 text-white"
+          className="p-2 rounded bg-gray-500 text-white text-xl"
         >
           <option value="">Filter by language</option>
           {allLanguages.map((lang) => (
@@ -140,7 +140,7 @@ export default function Explore() {
             setSelectedRegion(e.target.value);
             setShuffledCountries([]);
           }}
-          className="p-2 rounded bg-gray-500 text-white"
+          className="p-2 rounded bg-gray-500 text-white text-xl"
         >
           <option value="">Filter by region</option>
           {allRegions.map((region) => (
@@ -156,7 +156,7 @@ export default function Explore() {
             setSelectedCurrency(e.target.value);
             setShuffledCountries([]);
           }}
-          className="p-2 rounded bg-gray-500 text-white"
+          className="p-2 rounded bg-gray-500 text-white text-xl"
         >
           <option value="">Filter by currency</option>
           {allCurrencies.map((currency) => (
@@ -183,13 +183,13 @@ export default function Explore() {
         <div className="flex flex-col gap-4 w-64">
           <button
             onClick={shuffleCountries}
-            className="px-4 py-2 bg-yellow-500 text-black rounded hover:bg-yellow-600 transition w-full"
+            className="px-4 py-2 bg-[#3728dd] hover:bg-[#4A3FB5] text-white rounded transition w-full"
           >
             Shuffle Countries
           </button>
           <button
             onClick={resetFilters}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition w-full"
+            className="px-4 py-2 bg-[#3728dd] hover:bg-[#4A3FB5] text-white rounded transition w-full"
           >
             Reset Filters
           </button>

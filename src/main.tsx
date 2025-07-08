@@ -8,7 +8,7 @@ import Explore from "./pages/Explore";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import BucketList from "./pages/BucketList";
-import Forum from "./pages/Forum";
+import ForumOverview from "./pages/ForumOverview";
 import ForumDetail from "./pages/ForumDetail";
 import CountryDetails from "./pages/CountryDetails";
 import { CountryProvider } from "./context/CountryContext";
@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             <Route path="bucketlist" element={<BucketList />} />
-            <Route path="forum" element={<Forum />} />
+            <Route path="forum" element={<ForumOverview />} />
             <Route path="/chat/:countryName" element={<ForumDetail />} />
           </Route>
         </Routes>

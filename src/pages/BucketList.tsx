@@ -73,7 +73,7 @@ export default function BucketList() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 p-6 text-white">
+    <div className="min-h-screen p-6 bg-gray-900 text-white">
       <h2 className="text-3xl font-bold text-center mb-6">My Bucket List</h2>
       <div className="flex flex-wrap justify-evenly gap-4">
         {bucketList.length > 0 ? (

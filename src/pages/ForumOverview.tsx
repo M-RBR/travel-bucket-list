@@ -41,7 +41,7 @@ export default function Forum() {
     );
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 bg-cover bg-center bg-no-repeat text-white p-4">
+    <div className="min-h-screen w-full bg-gray-900 bg-cover bg-center bg-no-repeat text-white p-12">
       <div className="container mx-auto">
         <div className="flex justify-center">
           <div className="w-full max-w-md">

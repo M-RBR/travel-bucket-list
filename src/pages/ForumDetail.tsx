@@ -102,8 +102,14 @@ export default function ForumDetail() {
   const handleDelete = async (postId: string) => {
     if (!countryName) return;
 
-    await deleteDoc(doc(db, "forum", countryName, "messages", postId));
-    setPosts((prev) => prev.filter((p) => p.id !== postId));
+    try {
+      await deleteDoc(doc(db, "forum", countryName, "messages", postId));
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+      alert("Failed to delete post. Please try again.");
+    }
   };
 
   const handleEdit = (id: string, text: string) => {
@@ -146,7 +152,6 @@ export default function ForumDetail() {
     );
   }
 
-  // Group posts
   const nestedPosts: PostWithReplies[] = [];
   const parentPosts = posts.filter((p) => !p.parentId);
   const replyPosts = posts.filter((p) => p.parentId);
@@ -176,12 +181,12 @@ export default function ForumDetail() {
             <p className="text-gray-400 text-center">No posts yet.</p>
           ) : (
             nestedPosts.map((p) => {
-              const isOwner = p.sender === user.email;
+              const isPoster = p.sender === user.email;
               return (
                 <PostBlock
                   key={p.id}
                   post={p}
-                  isOwner={isOwner}
+                  isPoster={isPoster}
                   editingPostId={editingPostId}
                   editedText={editedText}
                   replyTo={replyingTo}
@@ -237,7 +242,7 @@ export default function ForumDetail() {
 
 function PostBlock({
   post,
-  isOwner,
+  isPoster,
   editingPostId,
   editedText,
   replyTo,
@@ -253,7 +258,7 @@ function PostBlock({
   userEmail,
 }: {
   post: PostWithReplies;
-  isOwner: boolean;
+  isPoster: boolean;
   editingPostId: string | null;
   editedText: string;
   replyTo: string | null;
@@ -317,7 +322,7 @@ function PostBlock({
             >
               Reply
             </button>
-            {isOwner && (
+            {isPoster && (
               <>
                 <button
                   onClick={() => onEdit(post.id, post.text)}
@@ -373,7 +378,7 @@ function PostBlock({
                   addSuffix: true,
                 })
               : "Just now";
-            const replyIsOwner = reply.sender === userEmail;
+            const replyisPoster = reply.sender === userEmail;
 
             return (
               <div key={reply.id} className="bg-gray-700 p-3 rounded">
@@ -411,7 +416,7 @@ function PostBlock({
                 ) : (
                   <>
                     <p className="text-white">{reply.text}</p>
-                    {replyIsOwner && (
+                    {replyisPoster && (
                       <div className="flex gap-4 text-sm text-gray-200 mt-2">
                         <button
                           onClick={() => {

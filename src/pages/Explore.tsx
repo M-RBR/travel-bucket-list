@@ -168,7 +168,7 @@ export default function Explore() {
       </div>
 
       <div className="flex flex-col items-center gap-4 mb-6">
-        <label className="text-white flex items-center gap-2">
+        <label className="text-white flex items-center gap-2 text-xl">
           <input
             type="checkbox"
             checked={onlyNonIndependent}

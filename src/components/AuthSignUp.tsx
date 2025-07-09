@@ -8,6 +8,7 @@ import { getFriendlyAuthError } from "../utils/authErrors";
 export default function AuthSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -73,19 +74,27 @@ export default function AuthSignUp() {
             required
           />
         </div>
-        <div>
+        <div className="relative">
           <label htmlFor="password" className="block text-white mb-1">
             Password
           </label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white"
+            className="w-full p-2 rounded bg-gray-700 text-white pr-10" // Added pr-10 for button space
             required
             minLength={6}
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2 text-gray-400 hover:text-white"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
         <button
           type="submit"

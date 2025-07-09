@@ -62,9 +62,11 @@ export default function BucketList() {
 
   if (!user) {
     return (
-      <p className="text-white text-center mt-10">
-        Please log in to view your bucket list.
-      </p>
+      <div className="min-h-screen p-6 bg-gray-900 text-white">
+        <p className="text-center mt-10 text-xl">
+          Please log in to view your bucket list.
+        </p>
+      </div>
     );
   }
 
@@ -74,7 +76,10 @@ export default function BucketList() {
 
   return (
     <div className="min-h-screen p-6 bg-gray-900 text-white">
-      <h2 className="text-3xl font-bold text-center mb-6">My Bucket List</h2>
+      <h2 className="text-3xl font-bold text-center p-2">My Bucket List</h2>
+      <p className="text-center p-2 mb-6 text-sm text-gray-300">
+        (logged in as: {user.email})
+      </p>
       <div className="flex flex-wrap justify-evenly gap-4">
         {bucketList.length > 0 ? (
           bucketList

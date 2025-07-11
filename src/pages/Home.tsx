@@ -16,7 +16,7 @@ export default function Home() {
     }),
   };
 
-  const flyInTexts = [
+  const flyInTexts: string[] = [
     "Explore Countries.",
     "Add them to your bucket list.",
     "Connect with other travellers.",
@@ -28,15 +28,10 @@ export default function Home() {
       style={{ backgroundImage: `url(${planetImage})` }}
     >
       <div className="pt-10 sm:pt-12 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative text-4xl sm:text-6xl font-bold text-blue-50 drop-shadow-2xl pb-2 inline-block mx-auto"
-        >
+        <h1 className="relative text-4xl sm:text-6xl font-bold text-white drop-shadow-2xl pb-2 inline-block mx-auto">
           Travel Bucket List
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-300 via-blue-200 to-transparent rounded-full"></span>
-        </motion.h1>
+        </h1>
       </div>
 
       <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6 px-2 flex flex-col items-center">
@@ -50,7 +45,7 @@ export default function Home() {
             className={`text-2xl sm:text-3xl text-center font-medium italic drop-shadow-lg
                        ${
                          i === 0
-                           ? "text-blue-100"
+                           ? "text-blue-50"
                            : i === 1
                            ? "text-blue-50"
                            : "text-blue-50"

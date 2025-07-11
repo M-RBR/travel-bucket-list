@@ -61,7 +61,7 @@ export default function Forum() {
                   {postedCountries.map((country) => (
                     <li key={country}>
                       <Link
-                        to={`/chat/${encodeURIComponent(country)}`}
+                        to={`/forum/${encodeURIComponent(country)}`}
                         className="text-blue-400 hover:text-blue-300 underline text-lg"
                       >
                         {country}

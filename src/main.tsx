@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="login" element={<Login />} />
             <Route path="bucketlist" element={<BucketList />} />
             <Route path="forum" element={<ForumOverview />} />
-            <Route path="/chat/:countryName" element={<ForumDetail />} />
+            <Route path="/forum/:countryName" element={<ForumDetail />} />
           </Route>
         </Routes>
       </CountryProvider>

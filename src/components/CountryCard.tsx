@@ -44,7 +44,7 @@ export default function CountryCard({
 
           {isFromBucketListContext && (
             <Link
-              to={`/chat/${encodeURIComponent(country.name.common)}`}
+              to={`/forum/${encodeURIComponent(country.name.common)}`}
               className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded transition duration-200 text-center"
             >
               Enter Forum

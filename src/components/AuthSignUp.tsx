@@ -83,7 +83,7 @@ export default function AuthSignUp() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white pr-10" // Added pr-10 for button space
+            className="w-full p-2 rounded bg-gray-700 text-white pr-10"
             required
             minLength={6}
           />

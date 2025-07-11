@@ -4,10 +4,10 @@ import { useCountryContext } from "../context/CountryContext";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import type { Country } from "../@types/Country";
+import type { Country, Currency } from "../@types/Country";
 
 export default function CountryDetails() {
-  const { name } = useParams();
+  const { name } = useParams<{ name: string }>();
   const { countries, fetchCountries } = useCountryContext();
   const { user } = useAuth();
 
@@ -81,8 +81,11 @@ export default function CountryDetails() {
 
       setSuccessMsg(`${country.name.common} added to your bucket list!`);
       setTimeout(() => setSuccessMsg(""), 4000);
-    } catch (err) {
-      console.error("Error adding to Firestore:", err);
+    } catch (err: unknown) {
+      console.error(
+        "Error adding to Firestore:",
+        err instanceof Error ? err.message : err
+      );
       setError("Failed to add to your bucket list. Try again later.");
     }
   }
@@ -97,7 +100,7 @@ export default function CountryDetails() {
 
   const currencies = country.currencies
     ? Object.values(country.currencies)
-        .map((c: any) => c.name)
+        .map((c: Currency) => c.name)
         .join(", ")
     : "N/A";
 

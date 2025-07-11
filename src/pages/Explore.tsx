@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCountryContext } from "../context/CountryContext";
 import CountryCard from "../components/CountryCard";
+import type { Country } from "../@types/Country";
 
 export default function Explore() {
   const { countries, fetchCountries } = useCountryContext();
@@ -10,7 +11,7 @@ export default function Explore() {
   const [selectedCurrency, setSelectedCurrency] = useState<string>("");
   const [onlyNonIndependent, setOnlyNonIndependent] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [shuffledCountries, setShuffledCountries] = useState<any[]>([]);
+  const [shuffledCountries, setShuffledCountries] = useState<Country[]>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -66,7 +67,7 @@ export default function Explore() {
     setShuffledCountries(shuffled);
   };
 
-  const filterCountries = (source: any[]) => {
+  const filterCountries = (source: Country[]) => {
     return source.filter((country) => {
       const matchesLanguage =
         selectedLanguage === "" ||
@@ -78,7 +79,7 @@ export default function Explore() {
       const matchesCurrency =
         selectedCurrency === "" ||
         Object.values(country.currencies || {})
-          .map((c: any) => c.name)
+          .map((currency) => currency.name)
           .includes(selectedCurrency);
 
       const matchesIndependence =

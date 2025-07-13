@@ -184,13 +184,13 @@ export default function Explore() {
         <div className="flex flex-col gap-4 w-64">
           <button
             onClick={shuffleCountries}
-            className="px-4 py-2 bg-[#3728dd] hover:bg-[#4A3FB5] text-white rounded transition w-full"
+            className="px-4 py-2 bg-purple-800 hover:bg-purple-700 text-white rounded transition w-full"
           >
             Shuffle Countries
           </button>
           <button
             onClick={resetFilters}
-            className="px-4 py-2 bg-[#3728dd] hover:bg-[#4A3FB5] text-white rounded transition w-full"
+            className="px-4 py-2  bg-red-800 hover:bg-red-700 text-white rounded transition w-full"
           >
             Reset Filters
           </button>

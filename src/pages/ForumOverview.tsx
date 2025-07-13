@@ -5,40 +5,57 @@ import { collectionGroup, query, where, getDocs } from "firebase/firestore";
 import { Link } from "react-router";
 
 export default function Forum() {
-  const { user } = useAuth();
-  const [postedCountries, setPostedCountries] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const authContext = useAuth();
+  const currentUser = authContext.user;
+
+  const [countriesWhereUserPosted, setCountriesWhereUserPosted] = useState<
+    string[]
+  >([]);
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
   useEffect(() => {
-    const loadPostedCountries = async () => {
-      if (!user) return;
+    async function getCountriesWhereUserHasPosted() {
+      if (!currentUser) {
+        return;
+      }
 
-      const q = query(
-        collectionGroup(db, "messages"),
-        where("sender", "==", user.email)
+      const userEmail = currentUser.email;
+      const messagesCollection = collectionGroup(db, "messages");
+      const messagesQuery = query(
+        messagesCollection,
+        where("sender", "==", userEmail)
       );
 
-      const snapshot = await getDocs(q);
+      const querySnapshot = await getDocs(messagesQuery);
 
-      const countriesSet = new Set<string>();
-      snapshot.forEach((doc) => {
-        const countryName = doc.ref.parent.parent?.id;
-        if (countryName) countriesSet.add(countryName);
+      const uniqueCountryNames = new Set<string>();
+
+      querySnapshot.forEach((document) => {
+        const documentReference = document.ref;
+        const parentCollectionReference = documentReference.parent;
+        const grandparentDocumentReference = parentCollectionReference.parent;
+
+        if (grandparentDocumentReference) {
+          const countryId = grandparentDocumentReference.id;
+          uniqueCountryNames.add(countryId);
+        }
       });
 
-      setPostedCountries(Array.from(countriesSet).sort());
-      setLoading(false);
-    };
+      const sortedCountryNames = Array.from(uniqueCountryNames).sort();
+      setCountriesWhereUserPosted(sortedCountryNames);
+      setIsLoadingData(false);
+    }
 
-    loadPostedCountries();
-  }, [user]);
+    getCountriesWhereUserHasPosted();
+  }, [currentUser]);
 
-  if (!user)
+  if (!currentUser) {
     return (
       <div className="min-h-screen bg-gray-900 p-6 text-center text-white text-xl">
-        <p>Please log in to view forum.</p>
+        <p>You need to be logged in to see the forum page.</p>
       </div>
     );
+  }
 
   return (
     <div className="min-h-screen w-full bg-gray-900 bg-cover bg-center bg-no-repeat text-white p-12">
@@ -47,28 +64,41 @@ export default function Forum() {
           <div className="w-full max-w-md">
             <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden p-6">
               <h1 className="text-3xl font-bold text-center text-white mb-4">
-                Forums you have posted in:
+                Forum List
               </h1>
+              <p className="text-center mb-6">
+                These are the forums where you have posted messages:
+              </p>
 
-              {loading ? (
-                <p className="text-white text-center">Loading forums...</p>
-              ) : postedCountries.length === 0 ? (
-                <p className="text-gray-300 text-center">
-                  You haven't posted in any forum yet.
-                </p>
+              {isLoadingData ? (
+                <div className="text-center">
+                  <p className="text-white">
+                    Please wait, we're loading your forums...
+                  </p>
+                </div>
+              ) : countriesWhereUserPosted.length === 0 ? (
+                <div className="text-center">
+                  <p className="text-gray-300">
+                    It looks like you haven't posted in any forums yet.
+                  </p>
+                </div>
               ) : (
-                <ul className="list-disc list-inside pl-6 space-y-2 text-white">
-                  {postedCountries.map((country) => (
-                    <li key={country}>
-                      <Link
-                        to={`/forum/${encodeURIComponent(country)}`}
-                        className="text-blue-400 hover:text-blue-300 underline text-lg"
-                      >
-                        {country}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <ul className="list-disc list-inside pl-6 space-y-2 text-white">
+                    {countriesWhereUserPosted.map((countryName) => {
+                      return (
+                        <li key={countryName} className="mb-2">
+                          <Link
+                            to={`/forum/${encodeURIComponent(countryName)}`}
+                            className="text-blue-400 hover:text-blue-300 underline text-lg"
+                          >
+                            {countryName}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               )}
             </div>
           </div>

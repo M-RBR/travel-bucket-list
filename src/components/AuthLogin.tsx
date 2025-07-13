@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../firebaseConfig";
 import { Link, useNavigate } from "react-router";
-import { getFriendlyAuthError } from "../utils/authErrors";
+import { getFullSentenceAuthError } from "../utils/authErrors";
 
 export default function AuthLogin() {
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ export default function AuthLogin() {
       }
     } catch (err) {
       if (err instanceof FirebaseError) {
-        setError(getFriendlyAuthError(err.code));
+        setError(getFullSentenceAuthError(err.code));
       } else {
         setError("An unknown error occurred");
       }

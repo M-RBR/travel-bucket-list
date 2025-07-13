@@ -1,4 +1,4 @@
-export function getFriendlyAuthError(code: string): string {
+export function getFullSentenceAuthError(code: string): string {
   switch (code) {
     case "auth/invalid-email":
       return "Invalid email address";

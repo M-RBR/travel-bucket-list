@@ -8,7 +8,6 @@ This project showcases core web development concepts, including **React fundamen
 
 Explore the application live here: https://travel-bucket-list-d99b4.web.app/
 
-[https://travel-bucket-list-d99b4.web.app/](https://travel-bucket-list-d99b4.web-app/)
 
 ## ✨ Key Features
 

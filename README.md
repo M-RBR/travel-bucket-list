@@ -20,6 +20,6 @@ Explore the application live here: https://travel-bucket-list-d99b4.web.app/
 ## 🛠️ Technologies Used
 
 * **Frontend:** React.js (Vite), TypeScript, CSS3 (Tailwind CSS)
-* **Routing:** React Router DOM
+* **Routing:** React Router
 * **Backend:** Firebase (Authentication, Cloud Firestore, Hosting)
 * **External API:** REST Countries API
